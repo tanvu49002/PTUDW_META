@@ -9,7 +9,7 @@
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();
 
-            return $result || false;
+            return $result;
         }
 
         function getTypeUser($email, $pass) {
@@ -26,18 +26,18 @@
             // Nếu có kết quả, trả về giá trị của cột "type", nếu không, trả về false
             return $result ? $result['type'] : false;
         }
-        function addAvatar($avatar) {
+        function addImage($avatar) {
             $sql = "INSERT INTO image (`path`) VALUES (:avatar)";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':avatar', $avatar);
             return $stmt->execute();
         }
-        function getIDAvatarByName($filename) {
-            $sql = "SELECT id FROM image WHERE path = :filename";
+        function getIDImageByName($image_path) {
+            $sql = "SELECT id FROM image WHERE path = :image_path";
         
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':filename', $filename);
+            $stmt->bindParam(':image_path', $image_path);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             

@@ -9,14 +9,13 @@
           $pass = $_POST["pass"];
           // echo "{$email}{$pass}";
           $result = $user->login($email, $pass);
-          // echo "{$result}";
+          
           $type = $user->getTypeUser($email, $pass);
           $UserEmail = $user->getUserEmail($email, $pass);
           $Displayname = $user->getUserDisplayName($email, $pass);
           $Id_Avatar = $user->getUserAvatarID($email, $pass);
           $Avatar_Path = $user->getAvatarNameById($Id_Avatar);
           if ($result) {
-            
             $_SESSION['user'] = $result;
             $_SESSION['type'] = $type;
             $_SESSION['email'] = $UserEmail;

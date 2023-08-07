@@ -37,8 +37,8 @@
                     if ($user->checkUserEmail($email)) {
                         $msg = "Email đã tồn tại.";
                     } else {
-                        $user->addAvatar($avatar_path);
-                        $id_avatar = $user->getIDAvatarByName($avatar_path);    
+                        $user->addImage($avatar_path);
+                        $id_avatar = $user->getIDImageByName($avatar_path);    
                         $kq = $user->register($email, $pass, $displayname, $id_avatar, $type);
                         if ($kq) {
                             if ($_FILES['avatar']['error'] == 0) {
