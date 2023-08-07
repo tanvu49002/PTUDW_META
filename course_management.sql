@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 07, 2023 lúc 12:00 PM
+-- Thời gian đã tạo: Th8 07, 2023 lúc 12:40 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -34,6 +34,14 @@ CREATE TABLE `comment` (
   `id_coursecontent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`id`, `comment_detail`, `id_user`, `id_coursecontent`) VALUES
+(1, 'video chất lượng', 14, 3),
+(2, 'bài giảng rất hay', 14, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,14 @@ CREATE TABLE `course` (
   `create_date` datetime NOT NULL DEFAULT current_timestamp(),
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `course`
+--
+
+INSERT INTO `course` (`id`, `id_image`, `name`, `create_date`, `id_user`) VALUES
+(1, 17, 'html-css', '2023-08-07 17:18:20', 15),
+(3, 17, 'javascript', '2023-08-07 17:19:24', 15);
 
 -- --------------------------------------------------------
 
@@ -63,6 +79,15 @@ CREATE TABLE `course_content` (
   `title` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `course_content`
+--
+
+INSERT INTO `course_content` (`id`, `id_course`, `id_video`, `id_image`, `id_exercise`, `title`) VALUES
+(1, 1, 22, 19, 1, 'giới thiệu html'),
+(2, 1, 23, 20, 0, 'giới thiệu css'),
+(3, 3, 24, 21, 0, 'giới thiệu về javascript');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +103,13 @@ CREATE TABLE `exercise` (
   `solution3` varchar(500) NOT NULL,
   `result` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `exercise`
+--
+
+INSERT INTO `exercise` (`id`, `ex_content`, `id_coursecontent`, `solution1`, `solution2`, `solution3`, `result`) VALUES
+(1, 'đâu là một thẻ của html', 1, '<12>', '<bb>', '<h1>', 3);
 
 -- --------------------------------------------------------
 
@@ -97,7 +129,15 @@ CREATE TABLE `image` (
 INSERT INTO `image` (`id`, `path`) VALUES
 (13, 'map.jpg'),
 (15, 'NewYork.jpg'),
-(16, 'admin.jpg');
+(16, 'admin.jpg'),
+(17, 'coursethumpnail.jpg'),
+(18, 'coursethumpnail2.jpg'),
+(19, 'thumpnailcontent1.jpg'),
+(20, 'thumpnailcontent2.jpg'),
+(21, 'thumpnailcontent3.jpg'),
+(22, 'video1.mp4'),
+(23, 'video2.mp4'),
+(24, 'video3.mp4');
 
 -- --------------------------------------------------------
 
@@ -112,6 +152,15 @@ CREATE TABLE `learning_process` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `learning_process`
+--
+
+INSERT INTO `learning_process` (`id_course`, `id_coursecontent`, `id_user`, `status`) VALUES
+(1, 1, 14, 1),
+(1, 1, 14, 1),
+(3, 1, 14, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +172,14 @@ CREATE TABLE `playlist` (
   `id_user` int(11) NOT NULL,
   `id_coursecontent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `id_user`, `id_coursecontent`) VALUES
+(1, 14, 1),
+(2, 14, 2);
 
 -- --------------------------------------------------------
 
@@ -221,37 +278,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `course_content`
 --
 ALTER TABLE `course_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `exercise`
 --
 ALTER TABLE `exercise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
