@@ -28,98 +28,15 @@
                     </div>
                 </div>
 
-                <div class="product-card">
-                    <div class="logo-cart">
-                        <img src="./public/images/logo1.jpg" alt="logo">
-                        <i class='bx bx-bookmark'></i>
-                    </div>
-                    <div class="main-images">
-                        <img id="blue" class="blue active" src="./public/images/blue.png" alt="blue">
-                        <img id="pink" class="pink" src="./public/images/pink.png" alt="blue">
-                        <img id="yellow" class="yellow" src="./public/images/yellow.png" alt="blue">
-                    </div>
-                    <div class="shoe-details">
-                        <span class="shoe_name"><a href="contentmanage">HTML CSS từ Zero đến Hero</a></span>
-
-                        <div class="playlist-btn">
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="updatecourse">Cập nhật</a></button>
-                            </div>
-
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="#">Xóa</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="button">
-                        <div class="button-layer"></div>
-                        <button><a class="btn-color-index" href="comment.php">Quản lý bình luận</a></button>
-                    </div> -->
-                </div>
-
-                <div class="product-card">
-                    <div class="logo-cart">
-                        <img src="./public/images/logo1.jpg" alt="logo">
-                        <i class='bx bx-bookmark'></i>
-                    </div>
-                    <div class="main-images">
-                        <img id="blue" class="blue active" src="./public/images/blue.png" alt="blue">
-                        <img id="pink" class="pink" src="./public/images/pink.png" alt="blue">
-                        <img id="yellow" class="yellow" src="./public/images/yellow.png" alt="blue">
-                    </div>
-                    <div class="shoe-details">
-                        <span class="shoe_name"><a href="./playlist-content.php">HTML CSS từ Zero đến Hero</a></span>
-
-                        <div class="playlist-btn">
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="updatecourse">Cập nhật</a></button>
-                            </div>
-
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="#">Xóa</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="button">
-                        <div class="button-layer"></div>
-                        <button><a class="btn-color-index" href="comment.php">Quản lý bình luận</a></button>
-                    </div> -->
-                </div>
-
-                <div class="product-card">
-                    <div class="logo-cart">
-                        <img src="./public/images/logo1.jpg" alt="logo">
-                        <i class='bx bx-bookmark'></i>
-                    </div>
-                    <div class="main-images">
-                        <img id="blue" class="blue active" src="./public/images/blue.png" alt="blue">
-                        <img id="pink" class="pink" src="./public/images/pink.png" alt="blue">
-                        <img id="yellow" class="yellow" src="./public/images/yellow.png" alt="blue">
-                    </div>
-                    <div class="shoe-details">
-                        <span class="shoe_name"><a href="./playlist-content.php">HTML CSS từ Zero đến Hero</a></span>
-
-                        <div class="playlist-btn">
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="updatecourse">Cập nhật</a></button>
-                            </div>
-
-                            <div class="stars">
-                                <div class="button-layer"></div>
-                                <button><a href="#">Xóa</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="button">
-                        <div class="button-layer"></div>
-                        <button><a class="btn-color-index" href="comment.php">Quản lý bình luận</a></button>
-                    </div> -->
-                </div>
+                <?php  
+                    require_once "./mvc/Models/course.php";
+                    $course = new course();
+                    $id_user = $_SESSION['user']['id'];
+                    $tests = $course->showCourseByTeacher($id_user);
+                    foreach ($tests as $test) {
+                        echo $this->showTeacherCourse($test['name'], $test['id'], $test['id_image']);
+                    }
+                ?>
             </div>
         </div>
     </section>

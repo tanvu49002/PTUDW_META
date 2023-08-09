@@ -26,27 +26,8 @@
             // Nếu có kết quả, trả về giá trị của cột "type", nếu không, trả về false
             return $result ? $result['type'] : false;
         }
-        function addImage($avatar) {
-            $sql = "INSERT INTO image (`path`) VALUES (:avatar)";
-
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':avatar', $avatar);
-            return $stmt->execute();
-        }
-        function getIDImageByName($image_path) {
-            $sql = "SELECT id FROM image WHERE path = :image_path";
         
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':image_path', $image_path);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            
-            // Lấy dữ liệu từ kết quả truy vấn
-            $result = $stmt->fetch();
         
-            // Kiểm tra xem có kết quả hay không, nếu có trả về giá trị "id", nếu không trả về false
-            return $result ? $result['id'] : false;
-        }
         
 
         function checkUserEmail($email) {
@@ -104,15 +85,36 @@
 
             return $result ? $result['id_avatar'] : false;
         }
-        function getAvatarNameById($id) {
-            $sql = "SELECT * FROM image WHERE id = :id";
+        
+        function updateUserInfor($id, $displayname, $id_avatar) {
+            $sql = "UPDATE `user` SET `displayname`= :displayname ,`id_avatar`= :id_avatar WHERE `id` = :id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':displayname', $displayname);
+            $stmt->bindParam(':id_avatar', $id_avatar);
+            $stmt->bindParam(':id', $id);
+
+            return $stmt->execute();
+        }
+
+        function changePassword($id, $pass) {
+            $sql = "UPDATE `user` SET `password`= :pass WHERE `id` = :id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':pass', $pass);
+            
+            $stmt->bindParam(':id', $id);
+
+            return $stmt->execute();
+        }
+
+        function checkPassword($id, $pass) {
+            $sql = "SELECT * FROM user WHERE id = :id AND password = :pass";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':pass', $pass);
             $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetch();
-
-            return $result ? $result['path'] : false;
+            return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
         }
 }
 ?>

@@ -33,12 +33,13 @@
                 } else {
                     require_once "./mvc/Models/user.php";
                     $user = new user();
-                    
+                    require_once "./mvc/Models/image.php";
+                    $image = new image();
                     if ($user->checkUserEmail($email)) {
                         $msg = "Email đã tồn tại.";
                     } else {
-                        $user->addImage($avatar_path);
-                        $id_avatar = $user->getIDImageByName($avatar_path);    
+                        $image->addImage($avatar_path);
+                        $id_avatar = $image->getIDImageByName($avatar_path);    
                         $kq = $user->register($email, $pass, $displayname, $id_avatar, $type);
                         if ($kq) {
                             if ($_FILES['avatar']['error'] == 0) {

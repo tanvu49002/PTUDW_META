@@ -22,21 +22,21 @@
 
             <div class="details">
                 <div class="tutor">
-                    <img src="./public/uploads/<?php echo $_SESSION['avatar_path']?>" alt="">
-                    <h3><?php echo $_SESSION['displayname'] ?></h3>
+                    <img src="./public/uploads/<?php echo $_SESSION['avatar_path']?>" alt="avatar">
+                    <h3><?php echo $_SESSION['user']['displayname'] ?></h3>
                     <span>Giảng viên</span>
                 </div>
                 <div class="flex">
-                    <a style="width: 565px;" href="#">
+                    <a style="width: 100%;" href="#">
                         <p>Tổng số khóa học <span>4</span></p>
                     </a>
 
-                    <a style="width: 565px;" href="#">
+                    <a style="width: 100%;" href="#">
                         <p>Tổng số video <span>4</span></p>
                     </a>
 
-                    <a style="width: 1200px;" href="update-profile.php">
-                        <p>Cập nhật trang cá nhân</p>
+                    <a style="width: 100%;" href="http://localhost/PTUDW_META/profile/updateprofile/<?php echo $_SESSION['user']['id']?>">
+                        <p style="background-color:blue; color:white;">Cập nhật trang cá nhân</p>
                     </a>
                 </div>
             </div>

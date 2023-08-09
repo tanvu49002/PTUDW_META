@@ -25,29 +25,29 @@
                 <div class="tutor">
                     <img src="./public/uploads/<?php echo $_SESSION['avatar_path']?>" alt="">
                     
-                    <h3><?php echo $_SESSION['displayname'] ?></h3>
+                    <h3><?php echo $_SESSION['user']['displayname'] ?></h3>
                     
                     <span>Học sinh</span>
                     
                 </div>
                 <div class="flex">
-                    <a style="width: 565px;" href="#">
-                        <p>Bài học đã lưu : <span>4</span></p>
+                    <a style="width: 100%;" href="#">
+                        <p>Video đã lưu : <span>4</span></p>
                     </a>
 
-                    <a style="width: 565px;" href="#">
+                    <a style="width: 100%;" href="#">
                         <p>Số lượt bình luận : <span>4</span></p>
                     </a>
 
-                    <a style="width: 1200px;" href="update-profile.php">
-                        <p>Cập nhật trang cá nhân</p>
+                    <a style="width: 100%;" href="http://localhost/PTUDW_META/profile/updateprofile/<?php echo $_SESSION['user']['id']?>">
+                        <p style="color:white; background-color:blue;">Cập nhật trang cá nhân</p>
                     </a>
                 </div>
             </div>
 
         </section>
 
-        <h3 class="" style="position: relative; bottom: 25px; font-size: 26px;">Khóa học đã lưu</h3>
+        <h3 class="" style="position: relative; bottom: 25px; font-size: 26px;">Video đã lưu</h3>
         <div class="body">
 
             <div class="list-product">

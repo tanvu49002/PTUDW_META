@@ -42,24 +42,21 @@
 
  
 
-        function updateCourse($id, $name, $thumbnail){
+        function updateCourse($name, $thumbnail, $id){
 
-            $sql = "UPDATE course SET name = :n AND id_image = :tb WHERE id = :id";
+            $sql = "UPDATE `course` SET `id_image`= :tb ,`name`= :n WHERE `id` = :id";
 
             $stmt = $this->conn->prepare($sql);
-
+            $stmt->bindParam(':n', $name);
+            $stmt->bindParam(':tb', $thumbnail);
             $stmt->bindParam(':id', $id);
 
-            $stmt->bindParam(':n', $name);
+            return $stmt->execute();
 
-            $stmt->bindParam(':tb', $thumbnail);
+            // $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
-            $stmt->execute();
-
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-            $result = $stmt->fetch();
-            return $result;
+            // $result = $stmt->fetch();
+            // return $result;
         }
 
         function checkDuplicateCourse($id_user, $namecourse) {
@@ -79,6 +76,34 @@
  
 
             return $result;
+        }
+
+        function showAllCourse() {
+            $sql = "SELECT * FROM course";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+        function showCourseByTeacher($id) {
+            $sql = "SELECT * FROM course WHERE id_user = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+
+        function deleteCoursebyID($id) {
+            $sql = "DELETE FROM course WHERE id = :id";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            return $stmt->execute();
         }
     }
 ?>

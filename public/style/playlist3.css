@@ -361,13 +361,14 @@
     background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
     transition: all 0.4s ease;
     border-radius: 25PX;
+    
 }
 
 .stars:hover .button-layer {
     left: 0;
 }
 
-.stars button {
+.stars .button {
     position: relative;
     height: 100%;
     width: 100%;

@@ -8,56 +8,57 @@
     <title>Phần điều khiển</title>
     <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="./public/style/nav.css">
+    <?php $base_url = 'http://localhost/PTUDW_META/'; ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>./public/style/nav.css">
 </head>
 
 <body>
     <aside class="sidebar">
         <div class="logo">
-            <img src="./public/images/logo.jpg" alt="logo">
-            <h2><a href="home">Meta</a></h2>
+            <img src="<?php echo $base_url; ?>./public/images/logo.jpg" alt="logo">
+            <h2><a href="http://localhost/PTUDW_META/home">Meta</a></h2>
         </div>
         <ul class="links">
             <h4>Danh cho học sinh</h4>
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="home">Trang chủ</a>
+                <a href="http://localhost/PTUDW_META/home">Trang chủ</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">show_chart</span>
-                <a href="about">Thành viên</a>
+                <a href="http://localhost/PTUDW_META/about">Thành viên</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">group</span>
-                <a href="teacherlist">Giảng viên</a>
+                <a href="http://localhost/PTUDW_META/teacherlist">Giảng viên</a>
             </li>
             <!-- <li>
                 <span class="material-symbols-outlined">flag</span>
                 <a href="#">Reports</a>
             </li> -->
-            <?php if ($_SESSION['type'] == 2) { ?>
+            <?php if ($_SESSION['user']['type'] == 2) { ?>
             <hr>
             <h4>Dành cho giảng viên</h4>
             <li>
                 <span class="material-symbols-outlined">person</span>
-                <a href="coursemanage">Quản lý khóa học</a>
+                <a href="http://localhost/PTUDW_META/coursemanage">Quản lý khóa học</a>
             </li>
             <?php } ?>
 
-            <?php if ($_SESSION['type'] == 3) { ?>
+            <?php if ($_SESSION['user']['type'] == 3) { ?>
             <hr>
             <h4>Quản lý</h4>
             <li>
                 <span class="material-symbols-outlined">bar_chart</span>
-                <a href="adminmanage">Quản lý</a>
+                <a href="http://localhost/PTUDW_META/adminmanage">Quản lý</a>
             </li>
             <?php } ?>
-            <?php if ($_SESSION['type'] == 1 || $_SESSION['type'] == 2) { ?>
+            <?php if ($_SESSION['user']['type'] == 1 || $_SESSION['user']['type'] == 2) { ?>
             <hr>
             <h4>Tài khoản</h4>
             <li>
                 <span class="material-symbols-outlined">bar_chart</span>
-                <a href="profile">Trang cá nhân</a>
+                <a href="http://localhost/PTUDW_META/profile">Trang cá nhân</a>
             </li>
             <?php } ?>
             <!-- <li>
@@ -77,7 +78,7 @@
                 <?php
                     if (isset($_POST['logout-submit'])) {
                         unset($_SESSION['user']);
-                        header('location:login');
+                        header('location:http://localhost/PTUDW_META/login');
                     }
                 ?>
             </form>
