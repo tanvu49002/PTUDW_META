@@ -6,6 +6,10 @@
             } 
             require_once "./mvc/Views/pages/detailvideo.php";
         }
-        
+        public function updateLearningProcess($status){
+            
+            echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            print_r($status);
+        }
     }
 ?>

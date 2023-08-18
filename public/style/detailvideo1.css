@@ -103,7 +103,10 @@ ul {
     background-color: #f2f2f2;
 }
 
-
+.disabled {
+    background-color: gray;
+    pointer-events: none;
+}
 #video-player {
     height: 466.675px;
     width: 770.65px;

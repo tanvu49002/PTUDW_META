@@ -17,6 +17,12 @@
             liToSelect.classList.add('selected'); // Thêm class 'selected' vào phần tử <li>
         };
     </script>
+    <style>
+        .disabled {
+            background-color: gray;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -67,6 +73,8 @@
                             $tests = $coursecontent->showCourseContentByCourseId($id_course);
                             $_SESSION['video-title'] = $tests[0]['title'];
 
+
+
                             foreach ($tests as $test) {
                                 echo $this->showContentList($test['title'], $test['id'], $test['id_video'], $test['create_date']) ;
                                 $check = $exercise->checkExerciseByIdContent($test['id']);
@@ -74,6 +82,14 @@
                                     echo $this->showExList($check['id'], $check['ex_content'], $check['solution1'], $check['solution2'], $check['solution3'], $check['result']);
                                 }
                             }
+
+                            require_once "./mvc/Models/learningprocess.php";
+                            $learningprocess = new learningprocess();
+                            
+                            $status = $learningprocess->getStatusByIdCourseAndIdUser($id_course, $_SESSION['user']['id']);
+                            $_SESSION['status_process'] = $status;
+
+
                         ?>
                         
                         <!-- Thêm các mục bài học và bài tập khác -->
@@ -216,12 +232,13 @@
         </div>
 
 
-
         <script>
-            // Bắt đầu nút sự kiện nút chuyển tiếp và nút quay lại
-
             
-
+            // Bắt đầu nút sự kiện nút chuyển tiếp và nút quay lại
+            const jSon = <?php echo json_encode($_SESSION['status_process']); ?>;
+            const cnt = jSon['status'];
+            console.log(cnt);
+    
             const videoPlayer = document.getElementById('video-player');
             const playlistItems = document.querySelectorAll('.playlist-item');
             const exerciseContainer = document.getElementById('exercise-container');
@@ -230,7 +247,18 @@
             const nextButton = document.getElementById('next-btn');
             const CreateDate = document.querySelector('.video-create-date');
 
-            
+          
+
+
+            videoPlayer.addEventListener("ended", function() {
+                if(currentPlaylistIndex == cnt){
+                    ++cnt;
+                    ++currentPlaylistIndex;
+                    nextButton.disabled = false; 
+                }       
+            });
+
+
             
 
             // const title = currentItem.getAttribute('data-title');
@@ -239,15 +267,28 @@
             // CreateDate.textContent = date;
 
             let currentPlaylistIndex = 0;
+            showContentByIndex(currentPlaylistIndex);
 
             videoPlayer.style.display = 'block';
             exerciseContainer.style.display = 'none';
 
+
+            // disable li haven't finished
+
+
+
             // Xử lý sự kiện khi người dùng nhấn nút Tiếp theo
-            nextButton.addEventListener('click', () => {
-                currentPlaylistIndex++;
-                showContentByIndex(currentPlaylistIndex);
-            });
+            if(currentPlaylistIndex < cnt){
+                nextButton.disabled = false;
+                nextButton.addEventListener('click', () => {
+                    if(currentPlaylistIndex != cnt - 1){
+                        currentPlaylistIndex++;
+                    }
+                    showContentByIndex(currentPlaylistIndex);
+                });
+            }else{
+                nextButton.disabled = true;
+            }
 
             // Xử lý sự kiện khi người dùng nhấn nút Quay lại
             prevButton.addEventListener('click', () => {
@@ -262,6 +303,7 @@
                 });
             });
 
+            
             var Result;
 
             function checkExercise(){
@@ -283,6 +325,12 @@
                 }
             }
 
+            for(var i = cnt; i < playlistItems.length ; ++i){
+                    // this.classList.remove('active');
+                    playlistItems[i].classList.add('disabled');
+                    console.log(i);
+                }
+
             document.getElementById("checkAnswer").addEventListener('click', checkExercise);
 
             function showContentByIndex(index) {
@@ -294,13 +342,14 @@
                 const id = currentItem.getAttribute('data-id');
                 // Set the active playlist item
                 playlistItems.forEach((item, idx) => {
-                    if (idx === index) {
+                    if (idx === index && idx < cnt) {
                         item.classList.add('active');
-                        
                     } else {
                         item.classList.remove('active');
                     }
                 });
+
+            
 
                 // Adjust the scroll position to show the active playlist item
                 const activeItem = document.querySelector('.playlist-item.active');
@@ -314,11 +363,13 @@
                     activeItem = playlistItems[0];
                 }
 
+
                 videoTitle.textContent = title;
                 CreateDate.textContent = date;
                 if (videoPath) {
                     videoPlayer.style.display = 'block';
                     exerciseContainer.style.display = 'none';
+                    
                     videoPlayer.src = videoPath;
                 }
 
