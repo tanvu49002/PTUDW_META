@@ -1,13 +1,4 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['newData'])) {
-          $data1 = $_POST['data1'];
-          $data2 = $_POST['data2'];
-          $data3 = $_POST['data3'];
-          echo $data1 . $data2 . $data3;
-        }
-    }
-
 
     class learningprocess extends Database {
 
@@ -39,7 +30,10 @@
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();
-            return $result ? $result : 0;
+            if($result == false){
+                $result['status'] = 1;
+            }
+            return $result;
         }
 
         function updateProcess($status, $id_course, $id_user) {

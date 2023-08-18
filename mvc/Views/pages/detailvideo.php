@@ -79,16 +79,19 @@
                                 echo $this->showContentList($test['title'], $test['id'], $test['id_video'], $test['create_date']) ;
                                 $check = $exercise->checkExerciseByIdContent($test['id']);
                                 if ($check ){
-                                    echo $this->showExList($check['id'], $check['ex_content'], $check['solution1'], $check['solution2'], $check['solution3'], $check['result']);
+                                    echo $this->showExList($check['id'], $check['ex_content'], $check['solution1'], $check['solution2'], $check['solution3'], $check['result'] - 1);
                                 }
                             }
 
                             require_once "./mvc/Models/learningprocess.php";
                             $learningprocess = new learningprocess();
                             
-                            $status = $learningprocess->getStatusByIdCourseAndIdUser($id_course, $_SESSION['user']['id']);
+                            $status = $learningprocess->getStatusByIdCourseAndIdUser
+                            ($id_course, $_SESSION['user']['id']);
+                            
                             $_SESSION['status_process'] = $status;
-
+                                // echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                                // print_r($_SESSION['status_process'] );
 
                         ?>
                         
@@ -298,8 +301,10 @@
 
             playlistItems.forEach((item, index) => {
                 item.addEventListener('click', () => {
-                    currentPlaylistIndex = index;
-                    showContentByIndex(currentPlaylistIndex);
+                    if(currentPlaylistIndex != index){
+                        currentPlaylistIndex = index;
+                        showContentByIndex(currentPlaylistIndex);
+                    }
                 });
             });
 
@@ -372,15 +377,14 @@
                     
                     videoPlayer.src = videoPath;
                 }
-
                 else {
                     videoPlayer.style.display = 'none';
                     exerciseContainer.style.display = 'block';
 
                     document.getElementById('question').innerHTML = currentItem.getAttribute('data-question');
-                    document.getElementById('quest1').textContent += currentItem.getAttribute('data-sol1');;
-                    document.getElementById('quest2').textContent += currentItem.getAttribute('data-sol2');
-                    document.getElementById('quest3').textContent += currentItem.getAttribute('data-sol3');
+                    document.getElementById('quest1').textContent = 'A. ' + currentItem.getAttribute('data-sol1');;
+                    document.getElementById('quest2').textContent = 'B. ' + currentItem.getAttribute('data-sol2');
+                    document.getElementById('quest3').textContent = 'C. ' +currentItem.getAttribute('data-sol3');
                     Result = currentItem.getAttribute('data-result');
                     // fetch(exercisePath)
                     //     .then(response => response.text())

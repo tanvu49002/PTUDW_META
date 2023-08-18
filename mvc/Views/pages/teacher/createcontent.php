@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="correct_option">Lựa chọn đúng (Nhập số 1-4)</label>
+                        <label for="correct_option">Lựa chọn đúng (Nhập số 1-3)</label>
                         <input type="number" id="correct_option" name="correct_option" min="1" max="4">
                     </div>
                     <!-- Kết thúc phần thêm câu hỏi trắc nghiệm -->
