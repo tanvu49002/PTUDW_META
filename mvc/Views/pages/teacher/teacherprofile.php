@@ -28,11 +28,27 @@
                 </div>
                 <div class="flex">
                     <a style="width: 100%;" href="#">
-                        <p>Tổng số khóa học <span>4</span></p>
+                        <p>Tổng số khóa học: <span>
+                            <?php
+                                require_once "./mvc/Models/course.php";
+                                $course = new course();
+                                $id = $_SESSION['user']['id'];
+                                $amountcourse = $course->showAmountofCourseByUserId($id);
+                                echo $amountcourse;
+                            ?>
+                        </span></p>
                     </a>
 
                     <a style="width: 100%;" href="#">
-                        <p>Tổng số video <span>4</span></p>
+                        <p>Tổng số video: <span>
+                            <?php
+                                require_once "./mvc/Models/coursecontent.php";
+                                $coursecontent = new coursecontent();
+                                $id = $_SESSION['user']['id'];
+                                $amountcoursecontent = $coursecontent->showAmountofCourseContentByUserId($id);
+                                echo $amountcoursecontent;
+                            ?>
+                        </span></p>
                     </a>
 
                     <a style="width: 100%;" href="http://localhost/PTUDW_META/profile/updateprofile/<?php echo $_SESSION['user']['id']?>">

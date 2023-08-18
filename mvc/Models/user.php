@@ -74,11 +74,32 @@
 
             return $result ? $result['displayname'] : false;
         }
+        function getUserDisplayNameById($id_user) {
+            $sql = "SELECT * FROM user WHERE `id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id_user);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+            return $result ? $result['displayname'] : false;
+        }
+
         function getUserAvatarID($email,$pass) {
             $sql = "SELECT * FROM user WHERE email = :email AND password = :pass";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':pass', $pass);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch();
+
+            return $result ? $result['id_avatar'] : false;
+        }
+
+        function getUserAvatarIDbyId($id) {
+            $sql = "SELECT * FROM user WHERE `id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetch();
@@ -115,6 +136,53 @@
             $stmt->bindParam(':pass', $pass);
             $stmt->execute();
             return $stmt->rowCount() > 0 ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+        }
+
+        function getUserByType($accounttype) {
+            $sql = "SELECT * FROM user WHERE `type` = :accounttype";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':accounttype', $accounttype);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+        function getUserByTypeAndName($accounttype, $name) {
+            $sql = "SELECT * FROM user WHERE `type` = :accounttype AND `displayname` = :name";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':accounttype', $accounttype);
+            $stmt->bindParam(':name', $name);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+        function getUserByID($id) {
+            $sql = "SELECT * FROM user WHERE `id` = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+        function showAllUser() {
+            $sql = "SELECT * FROM user";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+
+        function deleteUserbyID($id) {
+            $sql = "DELETE FROM user WHERE id = :id";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            return $stmt->execute();
         }
 }
 ?>

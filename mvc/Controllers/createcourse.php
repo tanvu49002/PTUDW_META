@@ -30,7 +30,7 @@
                     $image->addImage($thumbnail_path);
                     
                     $id_image = $image->getIDImageByName($thumbnail_path);
-                    $_SESSION['thumbnail_path'] = $image->getImageNameById($id_image);
+                    // $_SESSION['thumbnail_path'] = $image->getImageNameById($id_image);
                     $kq = $course->insertCourse($name, $id_image, $id_user);
                     if ($kq) {
                         if ($_FILES['Thumbnail']['error'] == 0) {

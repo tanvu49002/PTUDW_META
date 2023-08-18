@@ -6,6 +6,7 @@
 
         function __construct() 
         {
+            
             //Xu ly controller
             $arr = $this->handleURL();
             if ($arr != null && file_exists("./mvc/Controllers/{$arr[0]}.php")) {
@@ -22,14 +23,16 @@
                 unset($arr[1]);
             }
             //Xu ly params
-            $this->params = $arr?array_values($arr):[];
+            $this->params = $arr ? array_values($arr) : [];
 
             call_user_func_array([$this->controller, $this->action], $this->params);
         }
         
         function handleURL() {
             if (isset($_GET["url"])) {
-                return explode("/", filter_var(trim($_GET["url"], "/"))); //loai bo khoang trang va cat chuoi theo dau /
+                $URL = $_GET["url"];
+                // $URL = substr($URL, 0, $position);
+                return explode("/", filter_var(trim($URL))); //loai bo khoang trang va cat chuoi theo dau /
             }
         }
     }

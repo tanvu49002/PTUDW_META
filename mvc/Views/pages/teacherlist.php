@@ -7,7 +7,13 @@
     <title>Thông tin giảng viên</title>
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./public/style/introduction-lecturer2.css">
+    <link rel="stylesheet" href="./public/style/teacherlist.css">
+    <style>
+        .table__header .find-button-wrap input:hover {
+            cursor: pointer;
+            /* background-color: white; */
+        }
+    </style>
 </head>
 
 <body>
@@ -15,11 +21,18 @@
     <section id="section-main">
         <main class="table">
             <section class="table__header">
-                <h1>Thông tin giảng viên</h1>
-                <div class="input-group">
-                    <input type="search" placeholder="Search Data...">
+                <h1 style="font-size: 16px">Thông tin giảng viên</h1>
+                <form class="input-group" style="margin-left: 40%;" action="" method="post">
+                    <input type="search" placeholder="Search Data..." name="SearchTeacher-input">
                     <img src="./public/images/search.png" alt="">
-                </div>
+                    <input type="submit" value="Tìm kiếm"
+                        style="border-radius: 20px;padding: 8px;background: linear-gradient(130deg, rgba(251, 251, 254, .9), rgba(251, 251, 254, .2));border: none;" name="SearchTeacher-submit">
+                </form>
+
+                <!-- <form class="find-button-wrap" action="">
+                    
+                </form> -->
+                
 
             </section>
             <section class="table__body">
@@ -34,19 +47,30 @@
                             <th> Trang cá nhân <span class="icon-arrow">&UpArrow;</span></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td> 1 </td>
-                            <td> <img src="./public/images/Alex Gonley.jpg" alt="">Vũ Đình Quang Minh</td>
-                            <td> Giảng viên </td>
-                            <td class="test-remove"> 5 </td>
-                            <td class="test-remove"> <strong> 2 </strong></td>
-                            <td>
-                                <p class="status delivered"><a href="viewprofileteacher">Xem thông tin</a></p>
-                            </td>
-                        </tr>
-
-                    </tbody>
+                    <?php  
+                        require_once "./mvc/Models/user.php";
+                        $user = new user();
+                        require_once "./mvc/Models/course.php";
+                        $course = new course();
+                        $stt = 1;
+                        $type = 2;
+                        if (isset($_POST["SearchTeacher-submit"])) {
+                            $teacher_name = $_POST["SearchTeacher-input"];
+                            $tests = $user->getUserByTypeAndName($type, $teacher_name);
+                        }
+                        else {
+                            $tests = $user->getUserByType($type);
+                        }
+                        if ($tests) {
+                            foreach ($tests as $test) {
+                                echo $this->showTeacherList($stt, $test['id'], $test['displayname'], $test['id_avatar']);
+                                $stt++;
+                            }
+                        } else {
+                            echo "Không tìm thấy giáo viên nào";
+                        }
+                        
+                    ?>
                 </table>
             </section>
         </main>

@@ -29,7 +29,7 @@
                         <span class="card__profession">Web Developer</span>
                     </div>
 
-                    <a href="#" class="card__button">Xem và tải CV</a>
+                    <a href="#" class="card__button">Xem</a>
 
                     <div class="card__social">
                         <a href="#" class="card__link"><i class='bx bxl-instagram'></i></a>
@@ -46,7 +46,7 @@
                         <span class="card__profession">Product Designer</span>
                     </div>
 
-                    <a href="#" class="card__button">Xem và tải CV</a>
+                    <a href="#" class="card__button">Xem</a>
 
                     <div class="card__social">
                         <a href="#" class="card__link"><i class='bx bxl-instagram'></i></a>
@@ -63,7 +63,7 @@
                         <span class="card__profession">Ui/Ux Design</span>
                     </div>
 
-                    <a href="#" class="card__button">Xem và tải CV</a>
+                    <a href="#" class="card__button">Xem</a>
 
                     <div class="card__social">
                         <a href="#" class="card__link"><i class='bx bxl-instagram'></i></a>
@@ -81,7 +81,7 @@
                         <span class="card__profession">Ui/Ux Design</span>
                     </div>
 
-                    <a href="#" class="card__button">Xem và tải CV</a>
+                    <a href="#" class="card__button">Xem</a>
 
                     <div class="card__social">
                         <a href="#" class="card__link"><i class='bx bxl-instagram'></i></a>
@@ -98,7 +98,7 @@
                         <span class="card__profession">Ui/Ux Design</span>
                     </div>
 
-                    <a href="#" class="card__button">Xem và tải CV</a>
+                    <a href="#" class="card__button">Xem</a>
 
                     <div class="card__social">
                         <a href="#" class="card__link"><i class='bx bxl-instagram'></i></a>

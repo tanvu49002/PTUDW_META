@@ -79,7 +79,7 @@
         }
 
         function showAllCourse() {
-            $sql = "SELECT * FROM course";
+            $sql = "SELECT * FROM `course` a WHERE 0 < ( SELECT COUNT(*) FROM `course_content` b WHERE a.id = b.id_course );";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -96,6 +96,17 @@
             return $result;
         }
 
+        function showCourseByName($name) {
+            $sql = "SELECT * FROM course WHERE name = :name";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+        
+
         function deleteCoursebyID($id) {
             $sql = "DELETE FROM course WHERE id = :id";
 
@@ -105,5 +116,52 @@
 
             return $stmt->execute();
         }
+
+        function deleteCourseByUserID($id_user){
+            $sql = "DELETE FROM course WHERE id_user = :id_user";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id', $id_user);
+
+            return $stmt->execute();
+        }
+
+        public function getIDCourseByName($name, $id) {
+            $sql = "SELECT id FROM course WHERE name = :name AND id_user = :id";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+            $result = $stmt->fetch();
+
+            return $result;
+        }
+
+        function showAmountofCourseByUserId($id_user) {
+            $sql = "SELECT count(*) FROM course WHERE id_user = :id_user";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':id_user', $id_user);
+            
+
+            $stmt->execute();
+
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+            $result = $stmt->fetch();
+
+ 
+
+            return $result['count(*)'];
+        }
+        
     }
 ?>

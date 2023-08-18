@@ -1,16 +1,17 @@
 <?php
+    require_once "./mvc/Controllers/delete.php";
     class coursemanage {
         public function show() {  
             if (!(isset($_SESSION['user']))) {
                 header("Location:login");
             } 
+
+            
             // require_once "./mvc/Models/course.php";
             // $id_user = $_SESSION['user']['id'];
             // $course = new course();
             // $course->showCourseByTeacher($id_user);
-            if (isset($_POST['delete-submit'])) {
-                
-            }
+            
             require_once "./mvc/Views/pages/teacher/coursemanage.php";
         
         }
@@ -64,25 +65,32 @@
             }
             require_once "./mvc/Views/pages/teacher/updatecourse.php";
         }
+        public function deleteCourse($id) {
+            deleteCourseMain($id);
+            header("location:http://localhost/PTUDW_META/coursemanage");
+        }
 
+        public function contentmanage($id_course) {
+            if (!(isset($_SESSION['user']))) {
+                header("Location:login");
+            } 
+
+            require_once "./mvc/Views/pages/teacher/contentmanage.php";
+        }
         public function showTeacherCourse($name, $id, $id_image) {
             require_once "./mvc/Models/image.php";
             $image = new image();
             $thumbnail_path = $image->getImageNameById($id_image);
-            require_once "./mvc/Views/pages/teacher/coursemanage.php";
+            
             $view = '
         <div class="product-card" method="POST">
-            <div class="logo-cart">
-                <img src="./public/images/logo1.jpg" alt="logo">
-                <i class=\'bx bx-bookmark\'></i>
-            </div>
+            
             <div class="main-images">
                 <img id="blue" class="blue active" src="./public/uploads/'. $thumbnail_path .'" alt="thumbnail">
-                
             </div>
             
             <div class="shoe-details">
-                <span class="shoe_name"><a href="contentmanage">'. $name .'</a></span>
+                <span class="shoe_name"><a href="coursemanage/contentmanage/'.$id.'">'. $name .'</a></span>
 
                 <div class="playlist-btn">
                     <div class="stars">
@@ -90,21 +98,73 @@
                         <button id="update"><a href="coursemanage/updateCourse/'. $id .'">Cập nhật</a></button>
                     </div>
 
-                    <form class="star" method="post">
+                    <div class="stars">
                         <div class="button-layer"></div>
-                        <input class="button" type="submit" value="Xoá" name="delete-submit">
-                    </form>
+                        <button id="deleteButton"><a >Xóa</a></button>
+                    </div> 
                 </div>
             </div>
         </div>
-
-    </script>
+        <div id="confirmationModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Bạn có chắn muốn xoá khoá học này?</p>
+                        <div class="app300">
+                            <button id="confirmDelete"><a href="coursemanage/deleteCourse/'. $id .'">OK</a></button>
+                            <button id="cancelDelete">Cancel</button>
+                        </div>
+                    </div>
+                </div> 
             ';
             return $view;
             
         }
 
-        
+        public function showCourseContent($name, $id, $id_image ){
+            require_once "./mvc/Models/image.php";
+            $image = new image();
+            $thumbnailvideo_path = $image->getImageNameById($id_image);
+            $base_url = 'http://localhost/PTUDW_META/';
+            // echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{$thumbnailvideo_path}";
+            $view = '
+            <div class="product-card">
+            
+            <div class="main-images">
+            <img id="blue" class="blue active" src="' .$base_url. './public/uploads/'. $thumbnailvideo_path .'" alt="thumbnail">
+            </div>
+            <div class="shoe-details">
+                <span class="shoe_name"><a href="#">'.$name.'</a></span>
+
+                <div class="playlist-btn">
+                    <div class="stars">
+                        <div class="button-layer"></div>
+                        <button><a href="http://localhost/PTUDW_META/contentmanage/updatecontent/'.$id.'">Cập nhật</a></button>
+                    </div>
+
+                    <div class="stars">
+                        <div class="button-layer"></div>
+                        <button id="deleteButton"><a>Xóa</a></button>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a class="btn-color-index" href="http://localhost/PTUDW_META/contentmanage/commentmanage/'. $id .'">Quản lý bình luận</a></button>
+            </div>
+        </div>
+        <div id="confirmationModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Bạn có chắn muốn xoá khoá học này?</p>
+                        <div class="app300">
+                            <button id="confirmDelete"><a href="contentmanage/deletecontent/'. $id .'">OK</a></button>
+                            <button id="cancelDelete">Cancel</button>
+                        </div>
+                    </div>
+                </div> 
+            ';
+            return $view;
+        }
     }
 ?>
 <?php

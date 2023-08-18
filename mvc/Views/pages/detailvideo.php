@@ -9,90 +9,186 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./public/style/detail-video.css">
+    <?php $base_url = 'http://localhost/PTUDW_META/'; ?>
+    <link rel="stylesheet" href="<?php echo $base_url; ?>./public/style/detailvideo1.css">
+    <script>
+        window.onload = function() {
+            var liToSelect = document.getElementById('li-to-select'); // Thay 'li-to-select' bằng id thực sự của phần tử <li>
+            liToSelect.classList.add('selected'); // Thêm class 'selected' vào phần tử <li>
+        };
+    </script>
 </head>
 
 <body>
-<?php include './mvc/Views/masterlayout.php'; ?>
+    <?php include './mvc/Views/masterlayout.php'; ?>
+
+
     <section id="section-main">
 
         <div class="app5">
             <div class="container">
-                <div class="video-container">
-
-                    <div class="app6">
-                        <h2 class="video-title">Tiêu đề Video 1</h2>
-                        <p class="date"><i style="color:#8e44ad;" class="fas fa-calendar"></i><span style="margin-left: 5px;">22-10-2022</span></p>
+                <div class="video-container" id="p1">
+                <div class="app6">
+                        <h2 class="video-title"><?php 
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            echo $Coursecontents['title'];
+                        ?></h2>
+                        <p class="date"><i style="color:#8e44ad;" class="fas fa-calendar"></i><span class="video-create-date" style="margin-left: 5px;"><?php 
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            echo $Coursecontents['create_date'];
+                        ?></span></p>
                     </div>
                     <video id="video-player" controls>
-                        <source src="./public/videos/Túy Âm - Xesi x Masew x Nhatnguyen.mp4" type="video/mp4">
+                        <source src="<?php echo $base_url; ?>./public/uploads/<?php
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            require_once "./mvc/Models/image.php";
+                            $image = new image();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            $video_path = $image->getImageNameById($Coursecontents['id_video']);
+                            echo $video_path;
+                        ?>">
                     </video>
                 </div>
-
+                
                 <div class="playlist-container">
 
                     <ul id="playlist">
                         <h3 style="position: relative; bottom: 6px;">Danh sách bài học và bài tập</h3>
-                        <li class="playlist-item" data-title="Tiêu đề Video 1" data-video="./public/videos/Túy Âm - Xesi x Masew x Nhatnguyen.mp4">Bài học
-                            1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 2" data-video="./public/videos/password strength checker javascript web app.mp4">Bài học
-                            2</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 1" data-exercise="./public/videos/exercise.php">
-                            Bài
-                            tập 1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 3" data-video="./public/videos/3D popup card.mp4">
-                            Bài học
-                            3</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 2" data-exercise="path_to_exercise_2.html">Bài
-                            tập 2</li>
+                        <?php
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            require_once "./mvc/Models/exercise.php";
+                            $exercise = new exercise();
+                            $tests = $coursecontent->showCourseContentByCourseId($id_course);
+                            $_SESSION['video-title'] = $tests[0]['title'];
 
-                        <li class="playlist-item" data-title="Tiêu đề Video 1" data-video="./public/videos/Túy Âm - Xesi x Masew x Nhatnguyen.mp4">Bài học
-                            1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 2" data-video="./public/videos/password strength checker javascript web app.mp4">Bài học
-                            2</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 1" data-exercise="bai-tap-01.html">
-                            Bài
-                            tập 1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 3" data-video="./public/videos/3D popup card.mp4">
-                            Bài học
-                            3</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 2" data-exercise="path_to_exercise_2.html">Bài
-                            tập 2</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 1" data-video="./public/videos/Túy Âm - Xesi x Masew x Nhatnguyen.mp4">Bài học
-                            1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 2" data-video="./public/videos/password strength checker javascript web app.mp4">Bài học
-                            2</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 1" data-exercise="bai-tap-01.html">
-                            Bài
-                            tập 1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 3" data-video="./public/videos/3D popup card.mp4">
-                            Bài học
-                            3</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 2" data-exercise="path_to_exercise_2.html">Bài
-                            tập 2</li>
-
-                        <li class="playlist-item" data-title="Tiêu đề Video 1" data-video="./public/videos/Túy Âm - Xesi x Masew x Nhatnguyen.mp4">Bài học
-                            1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 2" data-video="./public/videos/password strength checker javascript web app.mp4">Bài học
-                            2</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 1" data-exercise="bai-tap-01.html">
-                            Bài
-                            tập 1</li>
-                        <li class="playlist-item" data-title="Tiêu đề Video 3" data-video="./public/videos/3D popup card.mp4">
-                            Bài học
-                            3</li>
-                        <li class="playlist-item exercise" data-title="Bài tập 2" data-exercise="path_to_exercise_2.html">Bài
-                            tập 2</li>
+                            foreach ($tests as $test) {
+                                echo $this->showContentList($test['title'], $test['id'], $test['id_video'], $test['create_date']) ;
+                                $check = $exercise->checkExerciseByIdContent($test['id']);
+                                if ($check ){
+                                    echo $this->showExList($check['id'], $check['ex_content'], $check['solution1'], $check['solution2'], $check['solution3'], $check['result']);
+                                }
+                            }
+                        ?>
+                        
                         <!-- Thêm các mục bài học và bài tập khác -->
                     </ul>
                 </div>
+                
+            </div>
+            <div id="exercise-container" style="top: -160px;width:500px; height: 400px; display: block; position: relative">
+            <label for="question" id="question" >
+            </label>
+            <br>
+            <label>
+                <input type='radio' name='Options'>
+                <label id="quest1" >A. </label>
+            </label>
+            <br>
+            <label>
+                <input type='radio' name='Options'>
+                <label id="quest2" >B. </label>
+            </label>
+            <br>
+            <label>
+                <input type='radio' name='Options'>
+                <label id="quest3" >C. </label>
+            </label>
+            <br>
+                <button class="btn" id="checkAnswer">Xác nhận</button>
+                <span id="right_answer" class="alert" style="display: none; color:green">Chính xác !</span>
+                <span id="wrong_answer" class="alert" style="display: none; color:red">Sai! Câu trả lời chính xác là: </span>
             </div>
 
+            <script>
+                function createVideoWindow(){
+
+                    const playlistItems = document.querySelectorAll('.playlist-item');
+
+
+                    var VideoContainer = document.getElementById('p1');
+                
+                    var Div_App6 = document.createElement('div');
+                    Div_App6.setAttribute('class', 'app6');
+
+                    var newH2= document.createElement('h2');
+                    newH2.setAttribute('class', 'video-title');
+
+
+                        
+                    
+                    var p_date = document.createElement('p');
+                    p_date.setAttribute('class', 'date');
+                    
+
+                    var p_i = document.createElement('i'); 
+                    p_i.style = "color: rgb(142, 68, 173)"; 
+                    p_i.setAttribute('class', 'fas fa-calendar');
+                    
+                    
+                    var p_span = document.createElement('span');
+                    p_span.setAttribute('class', 'video-create-date');
+                    p_span.style = "margin-left: 5px;";
+                    p_span.textContent = ``;
+
+                    p_date.appendChild(p_i);
+                    p_date.appendChild(p_span);
+                    Div_App6.appendChild(newH2);
+                    Div_App6.append(p_date);
+                
+
+                    VideoContainer.appendChild(Div_App6);
+
+
+                    var videoDiv = document.createElement('video');
+                    videoDiv.setAttribute('id', 'video-player');
+                    videoDiv.setAttribute('controls', '');
+                    videoDiv.style.display = 'block';
+
+                    var videoSource = document.createElement('source');
+                    videoSource.setAttribute('src', `\<?php echo $base_url; ?>./public/uploads/\<?php
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            require_once "./mvc/Models/image.php";
+                            $image = new image();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            $video_path = $image->getImageNameById($Coursecontents['id_video']);
+                            echo $video_path;
+                        ?>`);
+
+                    videoDiv.appendChild(videoSource);
+
+                    VideoContainer.appendChild(videoDiv);
+
+                }
+
+             // window.onload = createVideoWindow;
+            </script>
+
+            
+
             <div class="tutor">
-                <img src="./public/images/Alex Gonley.jpg" alt="">
+                
                 <div>
-                    <h3><a href="./details-profile-teach.php">Quang Minh</a></h3>
-                    <span>Giảng vien</span>
+                    <?php
+                        require_once "./mvc/Models/user.php";
+                        $user = new user();
+                        require_once "./mvc/Models/course.php";
+                        $course = new course();
+                        $get_course = $course->getCourseById($id_course);
+                        $tests = $user->getUserByID($get_course['id_user']);
+                       
+                        foreach ($tests as $test) {
+                            echo $this->showTeacherByContent($test['displayname'], $test['id'], $test['id_avatar'] ) ;
+                        }
+                        
+                    ?>
+                    
                 </div>
             </div>
 
@@ -100,7 +196,9 @@
                 <button class="btn" id="prev-btn" disabled>Quay lại</button>
                 <button class="comment-main-video">Bình luận</button>
                 <button class="btn" id="next-btn">Tiếp theo</button>
+
             </div>
+
 
 
             <div class="modal hide">
@@ -116,19 +214,29 @@
                 </div>
             </div>
         </div>
-        <div id="exercise-container" style="display: block; position: relative; bottom: 558px; margin-left: 28px;">
-        </div>
 
 
 
         <script>
             // Bắt đầu nút sự kiện nút chuyển tiếp và nút quay lại
+
+            
+
             const videoPlayer = document.getElementById('video-player');
             const playlistItems = document.querySelectorAll('.playlist-item');
             const exerciseContainer = document.getElementById('exercise-container');
             const videoTitle = document.querySelector('.video-title');
             const prevButton = document.getElementById('prev-btn');
             const nextButton = document.getElementById('next-btn');
+            const CreateDate = document.querySelector('.video-create-date');
+
+            
+            
+
+            // const title = currentItem.getAttribute('data-title');
+            // const date = currentItem.getAttribute('data-date');
+            // videoTitle.textContent = title;
+            // CreateDate.textContent = date;
 
             let currentPlaylistIndex = 0;
 
@@ -154,16 +262,41 @@
                 });
             });
 
+            var Result;
+
+            function checkExercise(){
+                var radioButtons = document.getElementsByName('Options');
+                var alphabet = Array('A', 'B', 'C');
+                if(radioButtons[Result].checked){
+                    document.getElementById('wrong_answer').style.display = 'none';
+                    document.getElementById('right_answer').style.display = 'block';
+                }
+                else{
+                    document.getElementById('right_answer').style.display = 'none';
+                    var Wrong_answer = document.getElementById('wrong_answer');
+                    Wrong_answer.style.display = 'block';
+                    var Txt = Wrong_answer.textContent;
+                    console.log(Txt.length);
+                    if(Txt.length < 32){
+                        Wrong_answer.textContent = Txt + ' ' + alphabet[Result];
+                    }
+                }
+            }
+
+            document.getElementById("checkAnswer").addEventListener('click', checkExercise);
+
             function showContentByIndex(index) {
                 const currentItem = playlistItems[index];
                 const videoPath = currentItem.getAttribute('data-video');
                 const exercisePath = currentItem.getAttribute('data-exercise');
                 const title = currentItem.getAttribute('data-title');
-
+                const date = currentItem.getAttribute('data-date');
+                const id = currentItem.getAttribute('data-id');
                 // Set the active playlist item
                 playlistItems.forEach((item, idx) => {
                     if (idx === index) {
                         item.classList.add('active');
+                        
                     } else {
                         item.classList.remove('active');
                     }
@@ -177,29 +310,37 @@
                         block: 'nearest',
                         inline: 'start'
                     });
+                }else{
+                    activeItem = playlistItems[0];
                 }
 
                 videoTitle.textContent = title;
-
+                CreateDate.textContent = date;
                 if (videoPath) {
                     videoPlayer.style.display = 'block';
                     exerciseContainer.style.display = 'none';
                     videoPlayer.src = videoPath;
                 }
 
-                if (exercisePath) {
+                else {
                     videoPlayer.style.display = 'none';
                     exerciseContainer.style.display = 'block';
-                    fetch(exercisePath)
-                        .then(response => response.text())
-                        .then(data => {
-                            exerciseContainer.innerHTML = data;
-                            bindQuizHandlers(); // Gọi hàm để xử lý câu hỏi trắc nghiệm
-                        })
-                        .catch(error => {
-                            exerciseContainer.innerHTML = "<p>Không thể tải nội dung bài tập.</p>";
-                            console.error(error);
-                        });
+
+                    document.getElementById('question').innerHTML = currentItem.getAttribute('data-question');
+                    document.getElementById('quest1').textContent += currentItem.getAttribute('data-sol1');;
+                    document.getElementById('quest2').textContent += currentItem.getAttribute('data-sol2');
+                    document.getElementById('quest3').textContent += currentItem.getAttribute('data-sol3');
+                    Result = currentItem.getAttribute('data-result');
+                    // fetch(exercisePath)
+                    //     .then(response => response.text())
+                    //     .then(data => {
+                    //         exerciseContainer.innerHTML = data;
+                    //         bindQuizHandlers(); // Gọi hàm để xử lý câu hỏi trắc nghiệm
+                    //     })
+                    //     .catch(error => {
+                    //         exerciseContainer.innerHTML = "<p>Không thể tải nội dung bài tập.</p>";
+                    //         console.error(error);
+                    //     });
                 }
 
                 // Disable nút Quay lại nếu đang ở mục đầu tiên
@@ -232,7 +373,7 @@
                     const totalQuestions = quizForm.querySelectorAll('input[type="radio"]').length;
                     const scorePercentage = (score / totalQuestions) * 100;
                     quizResultsContainer.innerHTML = `<p>Số câu trả lời đúng: ${score}/${totalQuestions}</p>
-                                      <p>Tỉ lệ đúng: ${scorePercentage.toFixed(2)}%</p>`;
+                                    <p>Tỉ lệ đúng: ${scorePercentage.toFixed(2)}%</p>`;
                 });
 
                 quizSubmitButton.addEventListener('click', () => {

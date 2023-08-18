@@ -10,10 +10,10 @@
         }
 
         function getIDImageByName($image_path) {
-            $sql = "SELECT id FROM image WHERE path = :image_path";
+            $sql = "SELECT image.id FROM `image` WHERE path = :path GROUP BY id desc LIMIT 1;";
         
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':image_path', $image_path);
+            $stmt->bindParam(':path', $image_path);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             
@@ -48,13 +48,13 @@
         }
 
         function deleteImagebyID($id) {
-            $sql = "DELETE FROM image WHERE id = :id";
+            $sql = "DELETE FROM `image` WHERE `image`.`id` = :id";
 
             $stmt = $this->conn->prepare($sql);
 
             $stmt->bindParam(':id', $id);
 
-            return $stmt->execute();
+           $stmt->execute();
         }
 }
 ?>
