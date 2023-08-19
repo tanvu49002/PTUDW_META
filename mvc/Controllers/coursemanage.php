@@ -100,21 +100,12 @@
 
                     <div class="stars">
                         <div class="button-layer"></div>
-                        <button id="deleteButton"><a >Xóa</a></button>
+                        <button id="deleteButton"><a href="coursemanage/deleteCourse/'. $id .'">Xóa</a></button>
                     </div> 
                 </div>
             </div>
         </div>
-        <div id="confirmationModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p>Bạn có chắn muốn xoá khoá học này?</p>
-                        <div class="app300">
-                            <button id="confirmDelete"><a href="coursemanage/deleteCourse/'. $id .'">OK</a></button>
-                            <button id="cancelDelete">Cancel</button>
-                        </div>
-                    </div>
-                </div> 
+        
             ';
             return $view;
             

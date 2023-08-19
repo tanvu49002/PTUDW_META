@@ -3,12 +3,12 @@
     class learningprocess extends Database {
 
         
-        function deleteLearningProcessCourseContentID($id_coursecontent){
-            $sql = "DELETE FROM learning_process WHERE id_coursecontent = :id_coursecontent";
+        function deleteLearningProcessByCourseID($id_course){
+            $sql = "DELETE FROM learning_process WHERE id_course = :id_course";
 
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->bindParam(':id_coursecontent', $id_coursecontent);
+            $stmt->bindParam(':id_course', $id_course);
 
             return $stmt->execute();
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 18, 2023 lúc 02:44 PM
+-- Thời gian đã tạo: Th8 19, 2023 lúc 08:54 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -34,6 +34,13 @@ CREATE TABLE `comment` (
   `id_coursecontent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`id`, `comment_detail`, `id_user`, `id_coursecontent`) VALUES
+(10, 'Bài học rất hay', 21, 55);
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +60,8 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `id_image`, `name`, `create_date`, `id_user`) VALUES
-(69, 198, 'PHP', '2023-08-17 22:01:05', 17);
+(72, 219, 'PHP', '2023-08-19 13:11:07', 17),
+(74, 228, 'Javascript', '2023-08-19 13:50:59', 22);
 
 -- --------------------------------------------------------
 
@@ -75,9 +83,9 @@ CREATE TABLE `course_content` (
 --
 
 INSERT INTO `course_content` (`id`, `id_course`, `id_video`, `id_image`, `title`, `create_date`) VALUES
-(46, 69, 200, 199, 'php - bài 1', '2023-08-17 22:06:13'),
-(48, 69, 204, 203, 'php - bài 2', '2023-08-17 22:24:24'),
-(49, 69, 206, 205, 'php - bài 3', '2023-08-17 22:24:52');
+(55, 72, 221, 220, 'php - bài 1', '2023-08-19 13:11:36'),
+(56, 72, 223, 222, 'php - bài 2', '2023-08-19 13:12:42'),
+(58, 74, 230, 229, 'javascript - bài 1', '2023-08-19 13:51:35');
 
 -- --------------------------------------------------------
 
@@ -94,6 +102,13 @@ CREATE TABLE `exercise` (
   `solution3` varchar(500) NOT NULL,
   `result` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `exercise`
+--
+
+INSERT INTO `exercise` (`id`, `ex_content`, `id_coursecontent`, `solution1`, `solution2`, `solution3`, `result`) VALUES
+(10, 'Biến trong php bắt đầu bằng ký tự gì ?', 56, '#', '$', '%', 2);
 
 -- --------------------------------------------------------
 
@@ -125,7 +140,28 @@ INSERT INTO `image` (`id`, `path`) VALUES
 (203, 'meta-image.png'),
 (204, 'custom select box.mp4'),
 (205, 'meta-image.png'),
-(206, 'vid-3.mp4');
+(206, 'vid-3.mp4'),
+(207, 'meta-image.png'),
+(208, 'vid-7.mp4'),
+(209, 'meta-image.png'),
+(210, 'vid-2.mp4'),
+(211, 'html-css-course.jpg'),
+(212, 'html.png'),
+(213, 'vid-9.mp4'),
+(214, 'javascript-2.jpeg'),
+(215, 'javascript-2.jpeg'),
+(216, 'custom select box.mp4'),
+(217, 'javascript-2.jpeg'),
+(218, 'customize HTML5 form elements.mp4'),
+(219, 'meta-image.png'),
+(220, 'meta-image.png'),
+(221, '3D popup card.mp4'),
+(222, 'meta-image.png'),
+(223, 'build gauge with css.mp4'),
+(227, 'Paris.jpg'),
+(228, 'javascript-2.jpeg'),
+(229, 'javascript-2.jpeg'),
+(230, 'custom select box.mp4');
 
 -- --------------------------------------------------------
 
@@ -139,13 +175,6 @@ CREATE TABLE `learning_process` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `learning_process`
---
-
-INSERT INTO `learning_process` (`id_course`, `id_user`, `status`) VALUES
-(69, 17, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -157,6 +186,13 @@ CREATE TABLE `playlist` (
   `id_user` int(11) NOT NULL,
   `id_coursecontent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `id_user`, `id_coursecontent`) VALUES
+(4, 21, 56);
 
 -- --------------------------------------------------------
 
@@ -181,7 +217,8 @@ INSERT INTO `user` (`id`, `email`, `password`, `displayname`, `id_avatar`, `type
 (14, 'vu@gmail.com', '2', 'Nguyễn Tấn Vũ', 122, 1),
 (17, 'teacher@gmail.com', '1', 'giảng viên 1', 111, 2),
 (19, 'admin@gmail.com', '1', 'Admin', 122, 3),
-(21, 'minh@gmail.com', '1', 'Quang Minh', 124, 1);
+(21, 'minh@gmail.com', '1', 'Quang Minh', 124, 1),
+(22, 'phuoc@gmail.com', '1', 'Duy Phước', 227, 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -255,43 +292,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT cho bảng `course_content`
 --
 ALTER TABLE `course_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT cho bảng `exercise`
 --
 ALTER TABLE `exercise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT cho bảng `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

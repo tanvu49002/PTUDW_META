@@ -6,13 +6,15 @@
             $course = new course();
             require_once "./mvc/Models/image.php";
             $image = new image();
+            require_once "./mvc/Models/learningprocess.php";
+            $learningprocess = new learningprocess();
             $tests = $getdata->getData(array('id'), 'course_content', 'WHERE id_course = ' .$id);
             foreach ($tests as $test){
                 foreach ($test as $dt) {
                     deleteContentMain($dt);
                 }
             }
-
+            $learningprocess->deleteLearningProcessByCourseID($id);
             $result = $getdata->getData(array('id_image'), 'course', 'WHERE id = ' .$id);
             // echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             // print_r($result[0]['id_image']);
@@ -35,7 +37,7 @@
             $exercise = new exercise();
             $comment->deleteCommentbyIDCourseContent($id_content);
             $exercise->deleteExerciseByCourseContentID($id_content);
-            $learningprocess->deleteLearningProcessCourseContentID($id_content);
+            
             $playlist->deletePlaylistbyIDCourseContent($id_content);
             $result = $coursecontent->getCourseContentById($id_content);
             $id_image = $result['id_image'];
