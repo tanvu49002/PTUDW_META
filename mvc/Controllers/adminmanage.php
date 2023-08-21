@@ -113,7 +113,7 @@ require_once "./mvc/Controllers/delete.php";
                         <div class="app11">
                             <p id="app12" class="status delivered"><a href="http://localhost/PTUDW_META/adminmanage/deleteUser/'.$id.'/'.$id_avatar.'/'.$type.'"> Xóa </a>
                             </p>
-                            <p class="status delivered"><a href="http://localhost/PTUDW_META/profile/updateprofile/'.$id.'">Cập nhật</a>
+                            <p class="status delivered"><a href="http://localhost/PTUDW_META/profile/updateUserProfile/'.$id.'/'.$id_avatar.'">Cập nhật</a>
                             </p>
 
                         </div>
