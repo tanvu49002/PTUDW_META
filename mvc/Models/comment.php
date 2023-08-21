@@ -1,9 +1,9 @@
 <?php
     class comment extends Database {
-        function showCommentByIdContent($id) {
-            $sql = "SELECT * FROM comment WHERE `id_coursecontent` = :id";
+        function showCommentByIdCourse($id_course) {
+            $sql = "SELECT * FROM comment WHERE `id_course` = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id_course);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
@@ -55,6 +55,21 @@
  
 
             return $result['count(*)'];
+        }
+        function insertComment($cmtdetail, $id_user, $id_course){
+
+            $sql = "INSERT INTO comment(`comment_detail`, `id_user`, `id_course`) VALUES (:cmtdetail, :id_user, :id_course)";
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bindParam(':cmtdetail', $cmtdetail);
+
+            $stmt->bindParam(':id_user', $id_user);
+
+            $stmt->bindParam(':id_course', $id_course);
+
+            return $stmt->execute();
+
         }
     }
 ?>

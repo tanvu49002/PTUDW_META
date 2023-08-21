@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 19, 2023 lúc 08:54 AM
+-- Thời gian đã tạo: Th8 21, 2023 lúc 04:12 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -31,15 +31,16 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `comment_detail` varchar(500) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_coursecontent` int(11) NOT NULL
+  `id_course` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `comment`
 --
 
-INSERT INTO `comment` (`id`, `comment_detail`, `id_user`, `id_coursecontent`) VALUES
-(10, 'Bài học rất hay', 21, 55);
+INSERT INTO `comment` (`id`, `comment_detail`, `id_user`, `id_course`) VALUES
+(29, 'test1', 17, 72),
+(30, 'test 2', 25, 72);
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,7 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`id`, `id_image`, `name`, `create_date`, `id_user`) VALUES
 (72, 219, 'PHP', '2023-08-19 13:11:07', 17),
-(74, 228, 'Javascript', '2023-08-19 13:50:59', 22);
+(77, 250, 'javascript', '2023-08-21 13:23:20', 24);
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,7 @@ CREATE TABLE `course_content` (
 INSERT INTO `course_content` (`id`, `id_course`, `id_video`, `id_image`, `title`, `create_date`) VALUES
 (55, 72, 221, 220, 'php - bài 1', '2023-08-19 13:11:36'),
 (56, 72, 223, 222, 'php - bài 2', '2023-08-19 13:12:42'),
-(58, 74, 230, 229, 'javascript - bài 1', '2023-08-19 13:51:35');
+(66, 77, 252, 251, 'javascript - bài 1', '2023-08-21 13:23:40');
 
 -- --------------------------------------------------------
 
@@ -126,11 +127,11 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`id`, `path`) VALUES
+(1, 'default.png'),
 (111, 'logo_header.png'),
 (113, 'meta-image.png'),
 (116, 'node.js-logo-image.png'),
 (122, 'adminimage.png'),
-(124, 'user.png'),
 (186, 'node.js-logo-image.png'),
 (198, 'meta-image.png'),
 (199, 'meta-image.png'),
@@ -158,10 +159,31 @@ INSERT INTO `image` (`id`, `path`) VALUES
 (221, '3D popup card.mp4'),
 (222, 'meta-image.png'),
 (223, 'build gauge with css.mp4'),
-(227, 'Paris.jpg'),
-(228, 'javascript-2.jpeg'),
-(229, 'javascript-2.jpeg'),
-(230, 'custom select box.mp4');
+(232, 'slider1.jpg'),
+(233, 'Paris.jpg'),
+(250, 'javascript-2.jpeg'),
+(251, 'javascript-2.jpeg'),
+(252, 'password strength checker javascript web app.mp4'),
+(258, ''),
+(259, ''),
+(260, ''),
+(261, ''),
+(262, ''),
+(263, 'Alex Gonley.jpg'),
+(264, 'Alex Gonley.jpg'),
+(265, ''),
+(266, ''),
+(267, ''),
+(268, ''),
+(269, ''),
+(270, 'csv.png'),
+(271, ''),
+(272, ''),
+(273, ''),
+(274, ''),
+(275, ''),
+(276, ''),
+(277, 'html_table.jpg');
 
 -- --------------------------------------------------------
 
@@ -184,15 +206,8 @@ CREATE TABLE `learning_process` (
 CREATE TABLE `playlist` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_coursecontent` int(11) NOT NULL
+  `id_course` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `playlist`
---
-
-INSERT INTO `playlist` (`id`, `id_user`, `id_coursecontent`) VALUES
-(4, 21, 56);
 
 -- --------------------------------------------------------
 
@@ -203,7 +218,7 @@ INSERT INTO `playlist` (`id`, `id_user`, `id_coursecontent`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `displayname` varchar(50) NOT NULL,
   `id_avatar` int(11) NOT NULL,
   `type` int(11) NOT NULL
@@ -214,11 +229,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `displayname`, `id_avatar`, `type`) VALUES
-(14, 'vu@gmail.com', '2', 'Nguyễn Tấn Vũ', 122, 1),
-(17, 'teacher@gmail.com', '1', 'giảng viên 1', 111, 2),
-(19, 'admin@gmail.com', '1', 'Admin', 122, 3),
-(21, 'minh@gmail.com', '1', 'Quang Minh', 124, 1),
-(22, 'phuoc@gmail.com', '1', 'Duy Phước', 227, 2);
+(17, 'teacher@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'giảng viên 1', 111, 2),
+(19, 'admin@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Admin', 122, 3),
+(24, 'phuoc@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Duy Phước', 232, 2),
+(25, 'minh@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Quang Minh', 233, 1),
+(47, 'abc6@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'abc6', 277, 1),
+(50, 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'test', 1, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -230,7 +246,7 @@ INSERT INTO `user` (`id`, `email`, `password`, `displayname`, `id_avatar`, `type
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cmt_user` (`id_user`),
-  ADD KEY `fk_cmt_coursecontent` (`id_coursecontent`);
+  ADD KEY `fk_cmt_course` (`id_course`);
 
 --
 -- Chỉ mục cho bảng `course`
@@ -275,7 +291,7 @@ ALTER TABLE `learning_process`
 ALTER TABLE `playlist`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_playlist_user` (`id_user`),
-  ADD KEY `fk_playlist_coursecontent` (`id_coursecontent`);
+  ADD KEY `fk_playlist_course` (`id_course`);
 
 --
 -- Chỉ mục cho bảng `user`
@@ -292,43 +308,43 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT cho bảng `course_content`
 --
 ALTER TABLE `course_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT cho bảng `exercise`
 --
 ALTER TABLE `exercise`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
 -- AUTO_INCREMENT cho bảng `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -338,7 +354,7 @@ ALTER TABLE `user`
 -- Các ràng buộc cho bảng `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_cmt_coursecontent` FOREIGN KEY (`id_coursecontent`) REFERENCES `course_content` (`id`),
+  ADD CONSTRAINT `fk_cmt_course` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`),
   ADD CONSTRAINT `fk_cmt_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
@@ -373,7 +389,7 @@ ALTER TABLE `learning_process`
 -- Các ràng buộc cho bảng `playlist`
 --
 ALTER TABLE `playlist`
-  ADD CONSTRAINT `fk_playlist_coursecontent` FOREIGN KEY (`id_coursecontent`) REFERENCES `course_content` (`id`),
+  ADD CONSTRAINT `fk_playlist_course` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`),
   ADD CONSTRAINT `fk_playlist_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --

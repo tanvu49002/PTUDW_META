@@ -312,3 +312,10 @@ tbody td.active {
     width: 2rem;
     height: auto;
 }
+
+.warning {
+    color: black;
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}

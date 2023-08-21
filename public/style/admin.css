@@ -313,3 +313,10 @@ tbody td.active {
     margin-bottom: 12px;
     background-color: red;
 }
+
+.warning {
+    color: black;
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}

@@ -8,7 +8,7 @@
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <?php $base_url = 'http://localhost/PTUDW_META/'; ?>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>./public/style/contentmanage1.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>./public/style/contentmanage.css">
 </head>
 
 <body>

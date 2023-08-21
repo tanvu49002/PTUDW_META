@@ -96,14 +96,14 @@
             return $result;
         }
 
-        function showCourseByName($name) {
-            $sql = "SELECT * FROM course WHERE name = :name";
+        function getCourseByName($name) {
+            $sql = "SELECT * FROM course WHERE `name` LIKE :name";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':name', $name);
+            $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
             $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            return $result;
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           
+            return $results;
         }
         
 

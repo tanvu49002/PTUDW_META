@@ -15,6 +15,12 @@ require_once "./mvc/Controllers/delete.php";
                 $user = new user();
                 require_once "./mvc/Models/image.php";
                 $image = new image();
+                require_once "./mvc/Models/playlist.php";
+                $playlist = new playlist();
+                require_once "./mvc/Models/comment.php";
+                $comment = new comment();
+                $comment->deleteCommentbyIDUser($id);
+                $playlist->deletePlaylistbyIDUser($id);
                 $user->deleteUserbyID($id);
                 $image->deleteImagebyID($id_avatar);
                 header("location:http://localhost/PTUDW_META/adminmanage");
@@ -34,7 +40,7 @@ require_once "./mvc/Controllers/delete.php";
                 $comment = new comment();
                 require_once "./mvc/Models/getdata.php";
                 $getdata = new getdata();
-                $video = $coursecontent->getCourseContentByUserId($id);
+                // $video = $coursecontent->getCourseContentByUserId($id);
                 
                  $Courses = $getdata->getData(array("id"), "course", 'WHERE id_user = '.$id.'');
                 
@@ -43,10 +49,10 @@ require_once "./mvc/Controllers/delete.php";
                     deleteCourseMain($values['id']);
                 }
                 //xoá cmt của người dùng trong video
-                $comment->deleteCommentbyIDUser($id_user);
+                $comment->deleteCommentbyIDUser($id);
                 
                 //xoá video khỏi playlist người học
-                $playlist->deletePlaylistbyIDCourseContent($video['id']);
+                $playlist->deletePlaylistbyIDUser($id);
                 
                 //xoá ngườI dùng
                 $user->deleteUserbyID($id);

@@ -147,6 +147,15 @@
             $result = $stmt->fetchAll();
             return $result;
         }
+        function getUserByName($name) {
+            $sql = "SELECT * FROM user WHERE displayname LIKE :name";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           
+            return $results;
+        }
         function getUserByTypeAndName($accounttype, $name) {
             $sql = "SELECT * FROM user WHERE `type` = :accounttype AND `displayname` = :name";
             $stmt = $this->conn->prepare($sql);

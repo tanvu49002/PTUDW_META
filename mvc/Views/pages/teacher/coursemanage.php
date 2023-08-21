@@ -7,7 +7,7 @@
     <title>Quản lý khóa học</title>
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./public/style/coursemanage1.css">
+    <link rel="stylesheet" href="./public/style/coursemanage.css">
 </head>
 
 <body>

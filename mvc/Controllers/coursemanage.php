@@ -59,7 +59,7 @@
                             $kq = move_uploaded_file($_FILES['coursethumbnail-update']['tmp_name'], "public/uploads/".$image_path); 
                         }
                         $msg = "Cập nhật khoá học thành công";
-                        header("location:http://localhost/PTUDW_META/coursemanage");
+                        header("Location: " . $_SERVER['HTTP_REFERER']);
                     }
                 }
             }
@@ -67,7 +67,7 @@
         }
         public function deleteCourse($id) {
             deleteCourseMain($id);
-            header("location:http://localhost/PTUDW_META/coursemanage");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
         }
 
         public function contentmanage($id_course) {
@@ -76,6 +76,12 @@
             } 
 
             require_once "./mvc/Views/pages/teacher/contentmanage.php";
+        }
+        public function commentmanage($id_course) {
+            if (!(isset($_SESSION['user']))) {
+                header("Location:login");
+            } 
+            require_once "./mvc/Views/pages/teacher/commentmanage.php";
         }
         public function showTeacherCourse($name, $id, $id_image) {
             require_once "./mvc/Models/image.php";
@@ -100,9 +106,13 @@
 
                     <div class="stars">
                         <div class="button-layer"></div>
-                        <button id="deleteButton"><a href="coursemanage/deleteCourse/'. $id .'">Xóa</a></button>
+                        <button><a href="coursemanage/deleteCourse/'. $id .'">Xóa</a></button>
                     </div> 
                 </div>
+            </div>
+            <div class="button">
+                <div class="button-layer"></div>
+                <button><a class="btn-color-index" href="http://localhost/PTUDW_META/coursemanage/commentmanage/'. $id .'">Quản lý bình luận</a></button>
             </div>
         </div>
         
@@ -134,25 +144,50 @@
 
                     <div class="stars">
                         <div class="button-layer"></div>
-                        <button id="deleteButton"><a>Xóa</a></button>
+                        <button><a href="http://localhost/PTUDW_META/contentmanage/deleteContent/'. $id .'">Xóa</a></button>
                     </div>
                 </div>
             </div>
-            <div class="button">
-                <div class="button-layer"></div>
-                <button><a class="btn-color-index" href="http://localhost/PTUDW_META/contentmanage/commentmanage/'. $id .'">Quản lý bình luận</a></button>
-            </div>
+            
         </div>
-        <div id="confirmationModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p>Bạn có chắn muốn xoá khoá học này?</p>
-                        <div class="app300">
-                            <button id="confirmDelete"><a href="contentmanage/deletecontent/'. $id .'">OK</a></button>
-                            <button id="cancelDelete">Cancel</button>
+            ';
+            return $view;
+        }
+        public function showCommentListByContentID($id, $cmt_detail, $id_user) {
+            $base_url = 'http://localhost/PTUDW_META/';
+            require_once "./mvc/Models/user.php";
+            $user = new user();
+            require_once "./mvc/Models/image.php";
+            $image = new image();
+            $displayname = $user->getUserDisplayNameById($id_user);
+            $id_avatar = $user->getUserAvatarIDbyId($id_user);
+            $avatar_path = $image->getImageNameById($id_avatar);
+            $view = '
+            <div class="comments__container center__display">
+                <div class="comment__card">
+                    <div class="comment__info">
+                        <div class="pic center__display">
+                            <img id="blue" class="cmt-avatar" src="' .$base_url. './public/uploads/'. $avatar_path .'" alt="thumbnail">
+                        </div>
+                        <div class="cmt-wrap">
+                            <small class="nickname">
+                                '.$displayname.'
+                            </small>
+                            <p class="comment">
+                                '.$cmt_detail.'
+                            </p>
+                        </div>
+                        
+                        <div class="comment__bottom">
+                            <div class="container-btn">
+                                <button>
+                                    <a class="delete-comment" href="http://localhost/PTUDW_META/commentmanage/deletecomment/'.$id.'">Xóa bình luận</a>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
+            </div>
             ';
             return $view;
         }

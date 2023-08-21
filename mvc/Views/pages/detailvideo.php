@@ -10,7 +10,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <?php $base_url = 'http://localhost/PTUDW_META/'; ?>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>./public/style/detailvideo2.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>./public/style/detailvideo.css">
     <script>
         window.onload = function() {
             var liToSelect = document.getElementById(
@@ -37,17 +37,17 @@
                 <div class="video-container" id="p1">
                     <div class="app6">
                         <h2 class="video-title"><?php
-                                                require_once "./mvc/Models/coursecontent.php";
-                                                $coursecontent = new coursecontent();
-                                                $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                                                echo $Coursecontents['title'];
-                                                ?></h2>
-                        <p class="date"><i style="color:#8e44ad;" class="fas fa-calendar"></i><span class="video-create-date" style="margin-left: 5px;"><?php
-                                                                                                                                                        require_once "./mvc/Models/coursecontent.php";
-                                                                                                                                                        $coursecontent = new coursecontent();
-                                                                                                                                                        $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                                                                                                                                                        echo $Coursecontents['create_date'];
-                                                                                                                                                        ?></span>
+                            require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            echo $Coursecontents['title'];
+                        ?></h2>
+                        <p class="date"><i style="color:#8e44ad;" class="fas fa-calendar"></i><span class="video-create-date" style="margin-left: 5px;">
+                        <?php                                                                        require_once "./mvc/Models/coursecontent.php";
+                            $coursecontent = new coursecontent();
+                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                            echo $Coursecontents['create_date'];
+                            ?></span>
                         </p>
                     </div>
                     <video id="video-player" controls>
@@ -85,12 +85,10 @@
                             }
                         }
 
+                        
+
                         require_once "./mvc/Models/learningprocess.php";
                         $learningprocess = new learningprocess();
-
-
-
-
                         $status = $learningprocess->getStatusByIdCourseAndIdUser($id_course, $_SESSION['user']['id']);
 
                         $_SESSION['status_process'] = $status;
@@ -131,9 +129,7 @@
                     <br>
                     <button class="btn" style="margin-top: 5px;" id="checkAnswer">Xác nhận</button>
                     <span id="right_answer" class="alert" style="display: none; color:green">Chính xác !</span>
-                    <span id="wrong_answer" class="alert" style="display: none; color:red">Sai! Câu trả lời chính xác
-                        là:
-                    </span>
+                    <span id="wrong_answer" class="alert" style="display: none; color:red">Sai! Câu trả lời chính xác là:</span>
                 </div>
             </div>
 
@@ -191,7 +187,7 @@
                     echo $video_path;?>`);
 
                     videoDiv.appendChild(videoSource);
-
+                    
                     VideoContainer.appendChild(videoDiv);
 
                 }
@@ -199,7 +195,7 @@
                 // window.onload = createVideoWindow;
             </script>
 
-
+            
             <div class="app710">
                 <div class="tutor">
 
@@ -217,18 +213,135 @@
                         }
 
                         ?>
+                        <p class="warning"><?php if (!empty($msg)) echo $msg; unset($msg); ?></p>
+                        <button class="save-main-video"><a href="http://localhost/PTUDW_META/detailvideo/saveCourseIntoPlaylist/<?php echo $id_course ?>">Lưu khoá học</a></button>
+                        <style>
+                            .save-main-video {
+                                position: relative;
+                                left: 27.5rem;
+                                top: -34rem;
+                                padding: 8px 20px;
+                                border: none;
+                                background-color: #007bff;
+                                color: #fff;
+                                cursor: pointer;
+                                border-radius: 5px;
+                            }
 
+                            .save-main-video a {
+                                color: #fff;    
+                            }
+                        </style>
                     </div>
                 </div>
-
+            
                 <div class="btn-container">
                     <button class="btn" id="prev-btn" disabled>Quay lại</button>
-                    <button class="comment-main-video">Bình luận</button>
+                    
                     <button class="btn" id="next-btn">Tiếp theo</button>
                 </div>
+                <section id="section-main">
+                    <div class="container1" style="position: relative; right: 44px;">
+
+                        <div style="position: relative; left: 19px;" class="comment__card">
+                            <h3 class="comment__title"><?php echo $_SESSION['user']['displayname'] ?></h3>
+                            <form action="" method="post">
+                                <textarea id="" cols="30" rows="10" style="width: 1102px;height: 119px;" name="Comment-Input"></textarea>
+                                <div class="comment__card-footer">
+                                    <!-- <div class="show-replies">Bình luận</div> -->
+                                    <input class="show-replies" type="submit" value="Bình luận" name="comment-submit">
+                                </div>
+                            </form>
+                        </div>
+                        <?php 
+                            require_once "./mvc/Models/comment.php";
+                            $comment = new comment();
+                            $tests = $comment->showCommentByIdCourse($id_course);
+                            foreach ($tests as $test) {
+                                echo $this->showComment($test['id_user'], $test['comment_detail']);
+                            }
+                        ?>
+                    </div>
+                    <!-- <script>
+                        const showContainers = document.querySelectorAll(".show-replies");
+
+                        showContainers.forEach((btn) =>
+                            btn.addEventListener("click", (e) => {
+                                let parentContainer = e.target.closest(".comment__container");
+                                let _id = parentContainer.id;
+                                if (_id) {
+                                    let childrenContainer = parentContainer.querySelectorAll(
+                                        `[dataset=${_id}]`
+                                    );
+                                    childrenContainer.forEach((child) => child.classList.toggle("opened"));
+                                }
+                            })
+                        );
+                    </script> -->
+                    <style>
+                        *,
+                        *::before,
+                        *::after {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+
+                        .comment__container {
+                            display: none;
+                            position: relative;
+                        }
+
+                        .comment__container.opened {
+                            display: block;
+                        }
+
+                        .comment__container::before {
+                            content: "";
+                            background-color: rgb(170, 170, 170);
+                            position: absolute;
+                            min-height: 100%;
+                            width: 1px;
+                            left: -10px;
+                        }
+
+                        .comment__container:not(:first-child) {
+                            margin-left: 3rem;
+                            margin-top: 1rem;
+                        }
+
+                        .comment__card {
+                            padding: 20px;
+                            background-color: white;
+                            border: 1px solid rgba(0, 0, 0, 0.3);
+                            border-radius: 0.5rem;
+                            min-width: 100%;
+                            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .comment__card h3,
+                        .comment__card p {
+                            margin-bottom: 1rem;
+                        }
+
+                        .comment__card-footer {
+                            display: flex;
+                            font-size: 0.85rem;
+                            opacity: 0.6;
+                            gap: 30px;
+                            justify-content: flex-end;
+                            align-items: center;
+                        }
+
+                        .show-replies {
+                            outline: none;
+                            padding: 8px;
+                            color: black;
+                            cursor: pointer;
+                        }
+                    </style>
+                </section>
             </div>
-
-
 
             <div class="modal hide">
                 <div class="modal_inner">
@@ -336,6 +449,7 @@
                     var Wrong_answer = document.getElementById('wrong_answer');
                     Wrong_answer.style.display = 'block';
                     var Txt = Wrong_answer.textContent;
+                    console.log(Txt);
                     console.log(Txt.length);
                     if (Txt.length < 32) {
                         Wrong_answer.textContent = Txt + ' ' + alphabet[Result];
@@ -389,7 +503,7 @@
                     exerciseContainer.style.display = 'block';
 
                     document.getElementById('question').innerHTML = currentItem.getAttribute('data-question');
-                    document.getElementById('quest1').textContent = 'A. ' + currentItem.getAttribute('data-sol1');;
+                    document.getElementById('quest1').textContent = 'A. ' + currentItem.getAttribute('data-sol1');
                     document.getElementById('quest2').textContent = 'B. ' + currentItem.getAttribute('data-sol2');
                     document.getElementById('quest3').textContent = 'C. ' + currentItem.getAttribute('data-sol3');
                     Result = currentItem.getAttribute('data-result');

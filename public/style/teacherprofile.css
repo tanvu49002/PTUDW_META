@@ -20,7 +20,7 @@
     border-radius: .5rem;
     color: #fff;
     font-size: 1.8rem;
-    cursor: pointer;
+    cursor: default;
     text-transform: capitalize;
     padding: 1rem 3rem;
     text-align: center;
@@ -387,7 +387,7 @@ section {
     font-weight: 600;
     letter-spacing: 1px;
     color: #fff;
-    cursor: pointer;
+    cursor: default;
 }
 
 

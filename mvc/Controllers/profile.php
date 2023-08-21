@@ -90,13 +90,13 @@
             }
             require_once "./mvc/Views/pages/updateprofile.php";
         }
-        public function showUserPlaylist($id_coursecontent){
+        public function showUserPlaylist($id_course){
             $base_url = 'http://localhost/PTUDW_META/';
-            require_once "./mvc/Models/coursecontent.php";
-            $coursecontent = new coursecontent();
+            require_once "./mvc/Models/course.php";
+            $course = new course();
             require_once "./mvc/Models/image.php";
             $image = new image();
-            $name = $coursecontent->showCourseContentById($id_coursecontent);
+            $name = $course->getCourseById($id_course);
             $thumbnail_path = $image->getImageNameById($name['id_image']);
             $view = '
             <div class="product-card">
@@ -105,12 +105,12 @@
                     
                 </div>
                 <div class="shoe-details">
-                    <span class="shoe_name">'.$name['title'].'</span>
+                    <span class="shoe_name">'.$name['name'].'</span>
                     
                 </div>
                 <div class="button">
                     <div class="button-layer"></div>
-                    <button><a class="btn-color-index" href="http://localhost/PTUDW_META/home/detailvideo/'.$id_coursecontent.'">Học ngay</a></button>
+                    <button><a class="btn-color-index" href="http://localhost/PTUDW_META/home/detailvideo/'.$id_course.'">Học ngay</a></button>
 
                 </div>
             </div>

@@ -73,7 +73,7 @@
                     $id = $_SESSION['user']['id'];
                     $tests = $playlist->showPlaylistByUserId($id);
                     foreach ($tests as $test) {
-                        echo $this->showUserPlaylist($test['id_coursecontent']);
+                        echo $this->showUserPlaylist($test['id_course']);
                     }
                 ?>
             </div>

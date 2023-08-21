@@ -22,15 +22,16 @@
         <main class="table">
             <section class="table__header">
                 <h1 style="font-size: 16px">Quản lý</h1>
-                <form class="input-group" style="margin-left: 500px;" action="">
-                    <input type="search" placeholder="Search Data...">
+                <form class="input-group" style="margin-left: 500px;" action="" method="post">
+                    <input type="search" placeholder="Search Data..." name="SearchUser_Input">
                     <img src="./public/images/search.png" alt="">
+                    <input type="submit" value="Tìm kiếm"
+                        style="border-radius: 20px;padding: 8px;background: linear-gradient(130deg, rgba(251, 251, 254, .9), rgba(251, 251, 254, .2));border: none;" name="SearchUser_Submit">
                 </form>
 
-                <form class="find-button-wrap" action="">
-                    <input type="submit" value="Tìm kiếm"
-                        style="border-radius: 20px;padding: 8px;background: linear-gradient(130deg, rgba(251, 251, 254, .9), rgba(251, 251, 254, .2));border: none;">
-                </form>
+                <!-- <form class="find-button-wrap" action="">
+                    
+                </form> -->
 
             </section>
             <section class="table__body">
@@ -51,13 +52,26 @@
                         require_once "./mvc/Models/course.php";
                         $course = new course();
                         $stt = 1;
-                        $tests = $user->showAllUser();
                         
-                        foreach ($tests as $test) {
-                            echo $this->showAllUserInAdmin($stt, $test['id'], $test['displayname'], $test['id_avatar'], $test['type']);
-                            $stt++;
+                        if (isset($_POST["SearchUser_Submit"])) {
+                            $name = $_POST["SearchUser_Input"];
+                            $tests = $user->getUserByName($name);
                         }
+                        else {
+                            $tests = $user->showAllUser();
+                        }
+                        if ($tests) {
+                            foreach ($tests as $test) {
+                                echo $this->showAllUserInAdmin($stt, $test['id'], $test['displayname'], $test['id_avatar'], $test['type']);
+                                $stt++;
+                            }
+                        } else {
+                            $msg = "Không tìm thấy người dùng";
+                            
+                        }
+                        
                     ?>
+                    <p class="warning"><?php if (!empty($msg)) echo $msg; unset($msg); ?></p>
                 </table>
             </section>
         </main>

@@ -11,7 +11,7 @@
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" href="./public/style/CRUD-profile-teach.css">
+    <link rel="stylesheet" href="./public/style/teacherprofile.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="flex">
                     <a style="width: 100%;" href="#">
-                        <p>Tổng số khóa học: <span>
+                        <p style="cursor:default">Tổng số khóa học: <span>
                             <?php
                                 require_once "./mvc/Models/course.php";
                                 $course = new course();
@@ -40,7 +40,7 @@
                     </a>
 
                     <a style="width: 100%;" href="#">
-                        <p>Tổng số video: <span>
+                        <p style="cursor:default">Tổng số video: <span>
                             <?php
                                 require_once "./mvc/Models/coursecontent.php";
                                 $coursecontent = new coursecontent();

@@ -8,7 +8,8 @@
           $user = new user();
           $image = new image();
           $email = $_POST["email"];
-          $pass = $_POST["pass"];
+          $pass = md5($_POST["pass"]);
+          
           // echo "{$email}{$pass}";
           $result = $user->login($email, $pass);
           if ($result) {

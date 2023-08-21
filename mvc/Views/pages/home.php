@@ -37,7 +37,7 @@
                     $course = new course();
                     if (isset($_POST["SearchCourse-submit"])) {
                         $course_name = $_POST["SearchCourse-input"];
-                        $tests = $course->showCourseByName($course_name);
+                        $tests = $course->getCourseByName($course_name);
                         if ($tests){
                             foreach ($tests as $test) {
                                 echo $this->showCourse($test['name'], $test['id_image'], $test['id']);

@@ -171,6 +171,7 @@ ul {
 }
 .tutor div .info-wrap {
     display: block;
+    width: 200px;
 }
 
 .tutor img {
@@ -341,4 +342,11 @@ ul {
 
 .app10::-webkit-scrollbar-thumb:vertical:hover {
     background-color: #555;
+}
+
+.warning {
+    color: green;
+    font-size: 16px;
+    font-style: italic;
+    text-align: end;
 }

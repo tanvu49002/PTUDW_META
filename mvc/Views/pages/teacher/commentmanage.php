@@ -20,8 +20,8 @@
             <?php
                 require_once "./mvc/Models/comment.php";
                 $comment = new comment();
-                $id = $id_content;
-                $tests = $comment->showCommentByIdContent($id);
+                $id = $id_course;
+                $tests = $comment->showCommentByIdCourse($id);
                 foreach ($tests as $test) {
                     echo $this->showCommentListByContentID($test['id'], $test['comment_detail'], $test['id_user']);
                 }

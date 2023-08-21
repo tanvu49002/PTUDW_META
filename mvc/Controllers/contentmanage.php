@@ -68,7 +68,7 @@
                             $kq = move_uploaded_file($_FILES['updateVideoPath']['tmp_name'], "public/uploads/".$video_path); 
                         }
                         $msg = "Cập nhật video thành công";
-                        header("location:http://localhost/PTUDW_META/coursemanage");
+                        header("Location: " . $_SERVER['HTTP_REFERER']);
                     }
                 }
             }
@@ -77,17 +77,12 @@
 
         public function deleteContent($id) {
             deleteContentMain($id);
-            header("location:http://localhost/PTUDW_META/coursemanage");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
         }
         
  
         
-        public function commentmanage($id_content) {
-            if (!(isset($_SESSION['user']))) {
-                header("Location:login");
-            } 
-            require_once "./mvc/Views/pages/teacher/commentmanage.php";
-        }
+        
 
         public function showCourseListByTeacherId ($name, $id) {
             $view = '
@@ -96,43 +91,6 @@
             return $view;
         }
         
-        public function showCommentListByContentID($id, $cmt_detail, $id_user) {
-            $base_url = 'http://localhost/PTUDW_META/';
-            require_once "./mvc/Models/user.php";
-            $user = new user();
-            require_once "./mvc/Models/image.php";
-            $image = new image();
-            $displayname = $user->getUserDisplayNameById($id_user);
-            $id_avatar = $user->getUserAvatarIDbyId($id_user);
-            $avatar_path = $image->getImageNameById($id_avatar);
-            $view = '
-            <div class="comments__container center__display">
-                <div class="comment__card">
-                    <div class="comment__info">
-                        <div class="pic center__display">
-                            <img id="blue" class="cmt-avatar" src="' .$base_url. './public/uploads/'. $avatar_path .'" alt="thumbnail">
-                        </div>
-                        <div class="cmt-wrap">
-                            <small class="nickname">
-                                '.$displayname.'
-                            </small>
-                            <p class="comment">
-                                '.$cmt_detail.'
-                            </p>
-                        </div>
-                        
-                        <div class="comment__bottom">
-                            <div class="container-btn">
-                                <button>
-                                    <a class="delete-comment" href="http://localhost/PTUDW_META/commentmanage/deletecomment/'.$id.'">Xóa bình luận</a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            ';
-            return $view;
-        }
+        
     }
 ?>

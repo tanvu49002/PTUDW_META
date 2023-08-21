@@ -96,14 +96,15 @@
 .product-card {
     position: relative;
     max-width: 355px;
-    min-width: 355px;
+    width: 100%;
     border-radius: 25px;
     padding: 20px 30px 30px 30px;
     background: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     z-index: 3;
     overflow: hidden;
-    height: 360px;
+    max-height: 360px;
+
 }
 
 .product-card .logo-cart {
@@ -113,7 +114,6 @@
 }
 
 .product-card .logo-cart img {
-    display: none;
     height: 60px;
     width: 60px;
     object-fit: cover;
@@ -337,7 +337,6 @@
 }
 
 .playlist-btn {
-    /* margin-top: 20px; */
     display: flex;
     gap: 25px;
     position: relative;
@@ -363,7 +362,6 @@
     background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
     transition: all 0.4s ease;
     border-radius: 25PX;
-    
 }
 
 .stars:hover .button-layer {
@@ -387,17 +385,6 @@
 .stars button a {
 
     color: #fff;
-    cursor: pointer;
-}
-
-.stars input {
-    position: absolute;
-    height: 100%;
-    width: 300%;
-    /* left: -100%; */
-    background-image: linear-gradient(135deg, #9708CC, #43CBFF, #9708CC, #43CBFF);
-    transition: all 0.4s ease;
-    border-radius: 25PX;
     cursor: pointer;
 }
 

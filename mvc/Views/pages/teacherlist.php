@@ -7,7 +7,7 @@
     <title>Thông tin giảng viên</title>
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./public/style/teacherlist.css">
+    <link rel="stylesheet" href="./public/style/teacherlist1.css">
     <style>
         .table__header .find-button-wrap input:hover {
             cursor: pointer;
@@ -67,10 +67,12 @@
                                 $stt++;
                             }
                         } else {
-                            echo "Không tìm thấy giáo viên nào";
+                            $msg = "Không tìm thấy giáo viên nào";
+                            
                         }
                         
                     ?>
+                    <p class="warning"><?php if (!empty($msg)) echo $msg; unset($msg); ?></p>
                 </table>
             </section>
         </main>

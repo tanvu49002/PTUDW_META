@@ -17,8 +17,40 @@ class home
         if (!(isset($_SESSION['user']))) {
             header("Location:login");
         }
-
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["comment-submit"])) {
+            require_once "./mvc/Models/comment.php";
+            $comment = new comment();
+            if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Comment-Input"])){
+                $commentdetail = $_POST["Comment-Input"];
+                $comment->insertComment($commentdetail, $_SESSION['user']['id'], $id_course);
+            }
+        }
         require_once "./mvc/Views/pages/detailvideo.php";
+    }
+
+    public function showComment($id_user, $commentdetail){
+        require_once "./mvc/Models/user.php";
+        $user = new user();
+        require_once "./mvc/Models/image.php";
+        $image = new image();
+        $displayname = $user->getUserDisplayNameById($id_user);
+        
+        $view = '
+        <div class="comment__container opened" id="first-comment">
+        <div class="comment__card">
+            <h3 class="comment__title">'.$displayname.'</h3>
+            <p>
+                '.$commentdetail.'
+            </p>
+            <div class="comment__card-footer">
+                <div>Sửa bình luận</div>
+                <div>Xóa bình luận</div>
+            </div>
+        </div>
+    </div>
+        ';
+        return $view;
     }
     public function showHeaderOfContent($name, $date)
     {
@@ -89,29 +121,10 @@ class home
                     <img src="' . $base_url . './public/uploads/' . $avatar_path . '" alt="avatar">
                 </div>
                 <div class="info-wrap">
-                    <h3><a href="./details-profile-teach.php">' . $name . '</a></h3>
+                    <h3><a href="http://localhost/PTUDW_META/teacherlist/viewprofileteacher/'.$id.'">' . $name . '</a></h3>
                     <span>Giảng viên</span>
                 </div>
-                <button class="save-main-video"><a href="#">Lưu Video</a></button>
-
-
-                <style>
-                    .save-main-video {
-                        position: relative;
-                        left: 27.5rem;
-                        top: -34rem;
-                        padding: 8px 20px;
-                        border: none;
-                        background-color: #007bff;
-                        color: #fff;
-                        cursor: pointer;
-                        border-radius: 5px;
-                    }
-
-                    .save-main-video a {
-                        color: #fff;
-                    }
-                </style>
+                
             ';
         return $view;
     }

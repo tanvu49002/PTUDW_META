@@ -6,6 +6,8 @@
             $course = new course();
             require_once "./mvc/Models/image.php";
             $image = new image();
+            require_once "./mvc/Models/playlist.php";
+            $playlist = new playlist();
             require_once "./mvc/Models/learningprocess.php";
             $learningprocess = new learningprocess();
             $tests = $getdata->getData(array('id'), 'course_content', 'WHERE id_course = ' .$id);
@@ -19,6 +21,7 @@
             // echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             // print_r($result[0]['id_image']);
             $id_image = $result[0]['id_image'];
+            $playlist->deletePlaylistbyIDCourse($id);
             $course->deleteCoursebyID($id);
             $image->deleteImagebyID($id_image);
     }
@@ -37,8 +40,6 @@
             $exercise = new exercise();
             $comment->deleteCommentbyIDCourseContent($id_content);
             $exercise->deleteExerciseByCourseContentID($id_content);
-            
-            $playlist->deletePlaylistbyIDCourseContent($id_content);
             $result = $coursecontent->getCourseContentById($id_content);
             $id_image = $result['id_image'];
             $id_video = $result['id_video'];

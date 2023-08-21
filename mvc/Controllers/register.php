@@ -9,11 +9,13 @@
                 $type = -1;
                 $avatar_path = "";
 
-                if (isset($_FILES['avatar'])) {
+                if ($_FILES['avatar']['name']) {
+                   
                     $avatar = $_FILES['avatar'];
                     $avatar_path = $avatar['name'];
                 } else {
-                    $msg = "Thông tin không hợp lệ.";
+                    $avatar_path = "default.png";
+                    
                 }
                 
                 if (isset($_POST['role'])) {
@@ -38,16 +40,19 @@
                     if ($user->checkUserEmail($email)) {
                         $msg = "Email đã tồn tại.";
                     } else {
-                        $image->addImage($avatar_path);
+                        if ($avatar_path != "default.png") {
+                            $image->addImage($avatar_path);
+                        }
+                        
                         $id_avatar = $image->getIDImageByName($avatar_path);    
-                        $kq = $user->register($email, $pass, $displayname, $id_avatar, $type);
+                        
+                        $kq = $user->register($email, md5($pass), $displayname, $id_avatar, $type);
                         if ($kq) {
-                            if ($_FILES['avatar']['error'] == 0) {
-                                $kq = move_uploaded_file($_FILES['avatar']['tmp_name'], "public/uploads/".$avatar_path); 
+                            if ($id_avatar != 1 && $_FILES['avatar']['error'] == 0) {
+                                move_uploaded_file($_FILES['avatar']['tmp_name'], "public/uploads/".$avatar_path); 
+                                unset($_FILES['avatar']);
                             }
-                            if ($kq) {
-                                header("location:login");
-                            }
+                            header("location:login");         
                         }
                         
                         

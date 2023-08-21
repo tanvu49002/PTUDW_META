@@ -73,7 +73,7 @@
                                 $kq = move_uploaded_file($_FILES['contentvideo']['tmp_name'], "public/uploads/".$video_path); 
                             }
                             $msg = "Thêm video khoá học thành công";
-                            header("location:http://localhost/PTUDW_META/coursemanage");
+                            header("Location: " . $_SERVER['HTTP_REFERER']);
                         }
                         else {
                             $msg = "Thêm video khoá học thất bại";
