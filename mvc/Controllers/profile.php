@@ -28,6 +28,40 @@
             }
             
         }
+        public function updateUserProfile($id, $id_avatar){
+            if (!(isset($_SESSION['user']))) {
+                header("Location:login");
+            } 
+            require_once "./mvc/Models/user.php";
+            $user = new user();
+            require_once "./mvc/Models/image.php";
+            $image = new image();
+            if (isset($_POST['updateprofile-submit'])) {
+                $displayname = $_POST['update-displayname'];
+                
+                if (isset($_FILES['update-avatar'])) {
+                    $avatar = $_FILES['update-avatar'];
+                    $avatar_path = $avatar['name'];
+                    if (strlen($avatar_path))
+                    $image->updateImage($id_avatar, $avatar_path);
+                } 
+                $kq = $user->updateUserInfor($id, $displayname, $id_avatar);
+                if ($kq) {
+                    if ($_FILES['update-avatar']['error'] == 0) {
+                        $kq = move_uploaded_file($_FILES['update-avatar']['tmp_name'], "public/uploads/".$avatar_path); 
+                    }
+                    $_SESSION['user']['displayname'] = $displayname;
+                    $msg = "Cập nhật thông tin thành công";
+                }
+            }
+            if (isset($_POST["resetpass-submit"])){
+                $pass = "1";
+                $user->resetPass($id, md5($pass));
+                $msg = "Đặt lại mật khẩu thành công";
+            }
+            require_once "./mvc/Views/pages/admin/admin-updateprofile.php";
+        }
+    
         public function updateprofile($id) {
             if (!(isset($_SESSION['user']))) {
                 header("Location:login");
@@ -42,11 +76,11 @@
                 $displayname = $_POST['update-displayname'];
                 if (isset($_POST['old_pass']) && isset($_POST['new_pass']) && isset($_POST['re_pass']) && $_POST['old_pass'] !== "") {
                     $oldpass = $_POST['old_pass'];
-                    if ($user->checkPassword($id, $oldpass)) {
+                    if ($user->checkPassword($id, md5($oldpass))) {
                         if ($_POST['new_pass'] === $_POST['re_pass']) {
                             $pass = $_POST['new_pass'];
-                            $user->changePassword($id, $pass);
-                            $_SESSION['user']['password'] = $pass;
+                            $user->changePassword($id, md5($pass));
+                            $_SESSION['user']['password'] = md5($pass);
                             $kq = $user->updateUserInfor($id, $displayname, $id_avatar);
                             if ($kq) {
                                 if ($_FILES['update-avatar']['error'] == 0) {

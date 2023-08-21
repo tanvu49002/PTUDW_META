@@ -261,6 +261,7 @@
                         foreach ($tests as $test) {
                             echo $this->showComment($test['id_user'], $test['comment_detail']);
                         }
+                        
                         ?>
                     </div>
                     

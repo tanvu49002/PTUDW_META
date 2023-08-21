@@ -29,7 +29,7 @@
 
             return $stmt->execute();
         }
-        function deleteCommentbyIDCourse($id_coursecontent) {
+        function deleteCommentbyIDCourse($id_course) {
             $sql = "DELETE FROM comment WHERE id_course = :id_course";
 
             $stmt = $this->conn->prepare($sql);

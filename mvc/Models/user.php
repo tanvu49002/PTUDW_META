@@ -193,5 +193,16 @@
 
             return $stmt->execute();
         }
+
+        function resetPass($id, $pass){
+            $sql = "UPDATE `user` SET `password`= :pass WHERE `id` = :id";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':pass', $pass);
+            
+            $stmt->bindParam(':id', $id);
+
+            return $stmt->execute();
+        }
 }
 ?>

@@ -18,13 +18,18 @@ class home
             header("Location:login");
         }
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["comment-submit"])) {
+        if (isset($_POST["comment-submit"])) {
             require_once "./mvc/Models/comment.php";
             $comment = new comment();
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Comment-Input"])) {
+            if (isset($_POST["Comment-Input"])) {
                 $commentdetail = $_POST["Comment-Input"];
                 $comment->insertComment($commentdetail, $_SESSION['user']['id'], $id_course);
             }
+        }
+        if (isset($_POST["delete-cmt-submit"])){
+            require_once "./mvc/Models/comment.php";
+            $comment = new comment();
+            $comment->deleteCommentbyIDUser($_SESSION['user']['id']);
         }
         require_once "./mvc/Views/pages/detailvideo.php";
     }
@@ -45,9 +50,9 @@ class home
                 ' . $commentdetail . '
             </p>
             <div class="comment__card-footer">
-                <form action="">
+                <form action="" method="post">
                     <input style="position: relative; left: -6px; padding: 8px; border-radius: 20px; background: #007bff; color: #fff; cursor: pointer; border: none;" type="submit" value="Sửa bình luận">
-                    <input style="padding: 8px; border-radius: 20px; background: red; color: #fff; cursor: pointer; border: none;" type="submit" value="Xóa bình luận">
+                    <input style="padding: 8px; border-radius: 20px; background: red; color: #fff; cursor: pointer; border: none;" type="submit" value="Xóa bình luận" name="delete-cmt-submit">
                 </form>
             </div>
         </div>
