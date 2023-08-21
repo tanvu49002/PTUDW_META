@@ -10,6 +10,8 @@
             $playlist = new playlist();
             require_once "./mvc/Models/learningprocess.php";
             $learningprocess = new learningprocess();
+            require_once "./mvc/Models/comment.php";
+            $comment = new comment();
             $tests = $getdata->getData(array('id'), 'course_content', 'WHERE id_course = ' .$id);
             foreach ($tests as $test){
                 foreach ($test as $dt) {
@@ -21,6 +23,7 @@
             // echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
             // print_r($result[0]['id_image']);
             $id_image = $result[0]['id_image'];
+            $comment->deleteCommentbyIDCourse($id);
             $playlist->deletePlaylistbyIDCourse($id);
             $course->deleteCoursebyID($id);
             $image->deleteImagebyID($id_image);
@@ -30,15 +33,13 @@
             $coursecontent = new coursecontent();
             require_once "./mvc/Models/image.php";
             $image = new image();
-            require_once "./mvc/Models/comment.php";
-            $comment = new comment();
             require_once "./mvc/Models/learningprocess.php";
             $learningprocess = new learningprocess();
             require_once "./mvc/Models/playlist.php";
             $playlist = new playlist();
             require_once "./mvc/Models/exercise.php";
             $exercise = new exercise();
-            $comment->deleteCommentbyIDCourseContent($id_content);
+            
             $exercise->deleteExerciseByCourseContentID($id_content);
             $result = $coursecontent->getCourseContentById($id_content);
             $id_image = $result['id_image'];

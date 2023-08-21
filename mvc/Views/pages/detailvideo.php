@@ -210,8 +210,7 @@
                         }
 
                         ?>
-                        <p class="warning"><?php if (!empty($msg)) echo $msg;
-                                            unset($msg); ?></p>
+                        <p class="warning"><?php if (!empty($msg)) echo $msg;unset($msg); ?></p>
                         <button class="save-main-video"><a href="http://localhost/PTUDW_META/detailvideo/saveCourseIntoPlaylist/<?php echo $id_course ?>">Lưu
                                 khoá học</a></button>
                         <style>
@@ -264,22 +263,7 @@
                         }
                         ?>
                     </div>
-                    <!-- <script>
-                        const showContainers = document.querySelectorAll(".show-replies");
-
-                        showContainers.forEach((btn) =>
-                            btn.addEventListener("click", (e) => {
-                                let parentContainer = e.target.closest(".comment__container");
-                                let _id = parentContainer.id;
-                                if (_id) {
-                                    let childrenContainer = parentContainer.querySelectorAll(
-                                        `[dataset=${_id}]`
-                                    );
-                                    childrenContainer.forEach((child) => child.classList.toggle("opened"));
-                                }
-                            })
-                        );
-                    </script> -->
+                    
                     <style>
                         *,
                         *::before,

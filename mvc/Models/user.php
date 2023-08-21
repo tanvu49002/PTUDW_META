@@ -176,7 +176,7 @@
             return $result;
         }
         function showAllUser() {
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT * FROM user ORDER BY type DESC;";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);

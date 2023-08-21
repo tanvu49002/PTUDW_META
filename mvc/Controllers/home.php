@@ -36,8 +36,8 @@ class home
         require_once "./mvc/Models/image.php";
         $image = new image();
         $displayname = $user->getUserDisplayNameById($id_user);
-
-        $view = '
+        if ($id_user == $_SESSION["user"]["id"]){
+            $view = '
         <div class="comment__container opened" id="first-comment">
         <div class="comment__card">
             <h3 class="comment__title">' . $displayname . '</h3>
@@ -53,6 +53,22 @@ class home
         </div>
     </div>
         ';
+        } else {
+            $view = '
+            <div class="comment__container opened" id="first-comment">
+            <div class="comment__card">
+                <h3 class="comment__title">' . $displayname . '</h3>
+                <p>
+                    ' . $commentdetail . '
+                </p>
+                <div class="comment__card-footer">
+                    
+                </div>
+            </div>
+        </div>
+            ';
+        }
+        
         return $view;
     }
     public function showHeaderOfContent($name, $date)

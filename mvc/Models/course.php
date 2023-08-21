@@ -79,7 +79,7 @@
         }
 
         function showAllCourse() {
-            $sql = "SELECT * FROM `course` a WHERE 0 < ( SELECT COUNT(*) FROM `course_content` b WHERE a.id = b.id_course );";
+            $sql = "SELECT * FROM `course` a WHERE 0 < ( SELECT COUNT(*) FROM `course_content` b WHERE a.id = b.id_course ) ORDER BY a.id DESC;";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -97,7 +97,7 @@
         }
 
         function getCourseByName($name) {
-            $sql = "SELECT * FROM course WHERE `name` LIKE :name";
+            $sql = "SELECT * FROM course WHERE `name` LIKE :name ORDER BY id DESC;";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':name', '%' . $name . '%', PDO::PARAM_STR);
             $stmt->execute();

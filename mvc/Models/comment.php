@@ -1,7 +1,8 @@
 <?php
     class comment extends Database {
         function showCommentByIdCourse($id_course) {
-            $sql = "SELECT * FROM comment WHERE `id_course` = :id";
+            $sql = "SELECT * FROM comment WHERE id_course = :id ORDER BY id DESC;
+            ";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id', $id_course);
             $stmt->execute();
@@ -28,12 +29,12 @@
 
             return $stmt->execute();
         }
-        function deleteCommentbyIDCourseContent($id_coursecontent) {
-            $sql = "DELETE FROM comment WHERE id_coursecontent = :id_coursecontent";
+        function deleteCommentbyIDCourse($id_coursecontent) {
+            $sql = "DELETE FROM comment WHERE id_course = :id_course";
 
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->bindParam(':id_coursecontent', $id_coursecontent);
+            $stmt->bindParam(':id_course', $id_course);
 
             return $stmt->execute();
         }

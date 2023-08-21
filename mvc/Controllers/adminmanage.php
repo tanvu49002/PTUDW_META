@@ -22,7 +22,10 @@ require_once "./mvc/Controllers/delete.php";
                 $comment->deleteCommentbyIDUser($id);
                 $playlist->deletePlaylistbyIDUser($id);
                 $user->deleteUserbyID($id);
-                $image->deleteImagebyID($id_avatar);
+                if ($id_avatar != 1) {
+                    $image->deleteImagebyID($id_avatar);
+                }
+                
                 header("location:http://localhost/PTUDW_META/adminmanage");
             }
             else if ($type == 2){
@@ -57,7 +60,9 @@ require_once "./mvc/Controllers/delete.php";
                 //xoá ngườI dùng
                 $user->deleteUserbyID($id);
                 //xoá avatar người dùng
-                $image->deleteImagebyID($id_avatar);
+                if ($id_avatar != 1) {
+                    $image->deleteImagebyID($id_avatar);
+                }
                 header("location:http://localhost/PTUDW_META/adminmanage");
             }
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 21, 2023 lúc 04:12 PM
+-- Thời gian đã tạo: Th8 21, 2023 lúc 07:04 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -61,8 +61,7 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id`, `id_image`, `name`, `create_date`, `id_user`) VALUES
-(72, 219, 'PHP', '2023-08-19 13:11:07', 17),
-(77, 250, 'javascript', '2023-08-21 13:23:20', 24);
+(72, 219, 'PHP', '2023-08-19 13:11:07', 17);
 
 -- --------------------------------------------------------
 
@@ -85,8 +84,7 @@ CREATE TABLE `course_content` (
 
 INSERT INTO `course_content` (`id`, `id_course`, `id_video`, `id_image`, `title`, `create_date`) VALUES
 (55, 72, 221, 220, 'php - bài 1', '2023-08-19 13:11:36'),
-(56, 72, 223, 222, 'php - bài 2', '2023-08-19 13:12:42'),
-(66, 77, 252, 251, 'javascript - bài 1', '2023-08-21 13:23:40');
+(56, 72, 223, 222, 'php - bài 2', '2023-08-19 13:12:42');
 
 -- --------------------------------------------------------
 
@@ -159,11 +157,7 @@ INSERT INTO `image` (`id`, `path`) VALUES
 (221, '3D popup card.mp4'),
 (222, 'meta-image.png'),
 (223, 'build gauge with css.mp4'),
-(232, 'slider1.jpg'),
 (233, 'Paris.jpg'),
-(250, 'javascript-2.jpeg'),
-(251, 'javascript-2.jpeg'),
-(252, 'password strength checker javascript web app.mp4'),
 (258, ''),
 (259, ''),
 (260, ''),
@@ -231,10 +225,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `password`, `displayname`, `id_avatar`, `type`) VALUES
 (17, 'teacher@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'giảng viên 1', 111, 2),
 (19, 'admin@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Admin', 122, 3),
-(24, 'phuoc@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Duy Phước', 232, 2),
 (25, 'minh@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Quang Minh', 233, 1),
-(47, 'abc6@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'abc6', 277, 1),
-(50, 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'test', 1, 1);
+(47, 'abc6@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'abc6', 277, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -344,7 +336,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
