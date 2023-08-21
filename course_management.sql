@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 21, 2023 lúc 07:04 PM
+-- Thời gian đã tạo: Th8 21, 2023 lúc 09:49 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -39,8 +39,7 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `comment_detail`, `id_user`, `id_course`) VALUES
-(29, 'test1', 17, 72),
-(30, 'test 2', 25, 72);
+(29, 'test1', 17, 72);
 
 -- --------------------------------------------------------
 
@@ -157,7 +156,7 @@ INSERT INTO `image` (`id`, `path`) VALUES
 (221, '3D popup card.mp4'),
 (222, 'meta-image.png'),
 (223, 'build gauge with css.mp4'),
-(233, 'Paris.jpg'),
+(233, 'Alex Gonley.jpg'),
 (258, ''),
 (259, ''),
 (260, ''),
@@ -176,8 +175,7 @@ INSERT INTO `image` (`id`, `path`) VALUES
 (273, ''),
 (274, ''),
 (275, ''),
-(276, ''),
-(277, 'html_table.jpg');
+(276, '');
 
 -- --------------------------------------------------------
 
@@ -225,8 +223,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `password`, `displayname`, `id_avatar`, `type`) VALUES
 (17, 'teacher@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'giảng viên 1', 111, 2),
 (19, 'admin@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Admin', 122, 3),
-(25, 'minh@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Quang Minh', 233, 1),
-(47, 'abc6@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'abc6', 277, 1);
+(25, 'minh@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'quang minh', 233, 1),
+(52, 'tanvu@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'tanvu', 1, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -300,7 +298,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `course`
@@ -336,7 +334,7 @@ ALTER TABLE `playlist`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
