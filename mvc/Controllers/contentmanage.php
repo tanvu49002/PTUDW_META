@@ -79,11 +79,6 @@
             deleteContentMain($id);
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
-        
- 
-        
-        
-
         public function showCourseListByTeacherId ($name, $id) {
             $view = '
                 <option value="'.$name.'">'.$name.'</option>

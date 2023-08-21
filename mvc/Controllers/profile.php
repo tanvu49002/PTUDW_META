@@ -81,6 +81,12 @@
                             $pass = $_POST['new_pass'];
                             $user->changePassword($id, md5($pass));
                             $_SESSION['user']['password'] = md5($pass);
+                            if (isset($_FILES['update-avatar'])) {
+                                $avatar = $_FILES['update-avatar'];
+                                $avatar_path = $avatar['name'];
+                                if (strlen($avatar_path))
+                                $image->updateImage($id_avatar, $avatar_path);
+                            } 
                             $kq = $user->updateUserInfor($id, $displayname, $id_avatar);
                             if ($kq) {
                                 if ($_FILES['update-avatar']['error'] == 0) {
