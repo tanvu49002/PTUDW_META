@@ -37,29 +37,29 @@
                 <div class="video-container" id="p1">
                     <div class="app6">
                         <h2 class="video-title"><?php
-                            require_once "./mvc/Models/coursecontent.php";
-                            $coursecontent = new coursecontent();
-                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                            echo $Coursecontents['title'];
-                        ?></h2>
+                                                require_once "./mvc/Models/coursecontent.php";
+                                                $coursecontent = new coursecontent();
+                                                $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                                                echo $Coursecontents['title'];
+                                                ?></h2>
                         <p class="date"><i style="color:#8e44ad;" class="fas fa-calendar"></i><span class="video-create-date" style="margin-left: 5px;">
-                        <?php                                                                        require_once "./mvc/Models/coursecontent.php";
-                            $coursecontent = new coursecontent();
-                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                            echo $Coursecontents['create_date'];
-                            ?></span>
+                                <?php require_once "./mvc/Models/coursecontent.php";
+                                $coursecontent = new coursecontent();
+                                $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                                echo $Coursecontents['create_date'];
+                                ?></span>
                         </p>
                     </div>
                     <video id="video-player" controls>
                         <source src="<?php echo $base_url; ?>./public/uploads/<?php
-                            require_once "./mvc/Models/coursecontent.php";
-                            $coursecontent = new coursecontent();
-                            require_once "./mvc/Models/image.php";
-                            $image = new image();
-                            $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                            $video_path = $image->getImageNameById($Coursecontents['id_video']);
-                            echo $video_path;
-                        ?>">
+                                                                                require_once "./mvc/Models/coursecontent.php";
+                                                                                $coursecontent = new coursecontent();
+                                                                                require_once "./mvc/Models/image.php";
+                                                                                $image = new image();
+                                                                                $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                                                                                $video_path = $image->getImageNameById($Coursecontents['id_video']);
+                                                                                echo $video_path;
+                                                                                ?>">
                     </video>
                 </div>
 
@@ -85,7 +85,7 @@
                             }
                         }
 
-                        
+
 
                         require_once "./mvc/Models/learningprocess.php";
                         $learningprocess = new learningprocess();
@@ -104,11 +104,14 @@
             </div>
 
             <div class="app700">
-                <div id="exercise-container" style="top: -55px;
-    width: 500px;
+                <div id="exercise-container" style="    top: -55px;
     display: block;
     position: relative;
-    left: 26px;">
+    left: 26px;
+    height: 391.675px;
+    width: 770.65px;
+    background: #fff;
+    padding: 10px;">
                     <label for="question" id="question">
                     </label>
                     <br>
@@ -147,17 +150,12 @@
                     var newH2 = document.createElement('h2');
                     newH2.setAttribute('class', 'video-title');
 
-
-
-
                     var p_date = document.createElement('p');
                     p_date.setAttribute('class', 'date');
-
 
                     var p_i = document.createElement('i');
                     p_i.style = "color: rgb(142, 68, 173)";
                     p_i.setAttribute('class', 'fas fa-calendar');
-
 
                     var p_span = document.createElement('span');
                     p_span.setAttribute('class', 'video-create-date');
@@ -169,9 +167,7 @@
                     Div_App6.appendChild(newH2);
                     Div_App6.append(p_date);
 
-
                     VideoContainer.appendChild(Div_App6);
-
 
                     var videoDiv = document.createElement('video');
                     videoDiv.setAttribute('id', 'video-player');
@@ -179,15 +175,16 @@
                     videoDiv.style.display = 'block';
 
                     var videoSource = document.createElement('source');
-                    videoSource.setAttribute('src', `\<?php echo $base_url; ?>./public/uploads/\<?php                                                               require_once "./mvc/Models/coursecontent.php";
-                    $coursecontent = new coursecontent();                                    require_once "./mvc/Models/image.php";
-                    $image = new image();
-                    $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
-                    $video_path = $image->getImageNameById($Coursecontents['id_video']);
-                    echo $video_path;?>`);
+                    videoSource.setAttribute('src', `\<?php echo $base_url; ?>./public/uploads/\<?php require_once "./mvc/Models/coursecontent.php";
+                                                                                                $coursecontent = new coursecontent();
+                                                                                                require_once "./mvc/Models/image.php";
+                                                                                                $image = new image();
+                                                                                                $Coursecontents = $coursecontent->showFirstCourseContentByCourseId($id_course);
+                                                                                                $video_path = $image->getImageNameById($Coursecontents['id_video']);
+                                                                                                echo $video_path; ?>`);
 
                     videoDiv.appendChild(videoSource);
-                    
+
                     VideoContainer.appendChild(videoDiv);
 
                 }
@@ -195,7 +192,7 @@
                 // window.onload = createVideoWindow;
             </script>
 
-            
+
             <div class="app710">
                 <div class="tutor">
 
@@ -213,53 +210,58 @@
                         }
 
                         ?>
-                        <p class="warning"><?php if (!empty($msg)) echo $msg; unset($msg); ?></p>
-                        <button class="save-main-video"><a href="http://localhost/PTUDW_META/detailvideo/saveCourseIntoPlaylist/<?php echo $id_course ?>">Lưu khoá học</a></button>
+                        <p class="warning"><?php if (!empty($msg)) echo $msg;
+                                            unset($msg); ?></p>
+                        <button class="save-main-video"><a href="http://localhost/PTUDW_META/detailvideo/saveCourseIntoPlaylist/<?php echo $id_course ?>">Lưu
+                                khoá học</a></button>
                         <style>
                             .save-main-video {
                                 position: relative;
-                                left: 27.5rem;
-                                top: -34rem;
+                                left: 363px;
+                                top: -33rem;
                                 padding: 8px 20px;
                                 border: none;
                                 background-color: #007bff;
                                 color: #fff;
                                 cursor: pointer;
                                 border-radius: 5px;
+                                width: 39%;
                             }
 
                             .save-main-video a {
-                                color: #fff;    
+                                color: #fff;
                             }
                         </style>
                     </div>
                 </div>
-            
+
                 <div class="btn-container">
                     <button class="btn" id="prev-btn" disabled>Quay lại</button>
-                    
+
                     <button class="btn" id="next-btn">Tiếp theo</button>
                 </div>
                 <section id="section-main">
-                    <div class="container1" style="position: relative; right: 44px;">
+                    <div class="container1" style="position: relative; right: 44px; bottom: 20px;">
 
-                        <div style="position: relative; left: 19px;" class="comment__card">
+                        <div style="    position: relative;
+    left: -45px;
+    width: 103.5%;" class="comment__card">
                             <h3 class="comment__title"><?php echo $_SESSION['user']['displayname'] ?></h3>
                             <form action="" method="post">
-                                <textarea id="" cols="30" rows="10" style="width: 1102px;height: 119px;" name="Comment-Input"></textarea>
+                                <textarea id="" cols="30" rows="10" style="width: 1215px;height: 119px; resize: none;" name="Comment-Input"></textarea>
                                 <div class="comment__card-footer">
                                     <!-- <div class="show-replies">Bình luận</div> -->
                                     <input class="show-replies" type="submit" value="Bình luận" name="comment-submit">
                                 </div>
                             </form>
                         </div>
-                        <?php 
-                            require_once "./mvc/Models/comment.php";
-                            $comment = new comment();
-                            $tests = $comment->showCommentByIdCourse($id_course);
-                            foreach ($tests as $test) {
-                                echo $this->showComment($test['id_user'], $test['comment_detail']);
-                            }
+                        <?php
+                        require_once "./mvc/Models/comment.php";
+                        $comment = new comment();
+                        $tests = $comment->showCommentByIdCourse($id_course);
+                        foreach ($tests as $test) {
+                            echo $this->showComment($test['id_user'], $test['comment_detail']);
+                        }
                         ?>
                     </div>
                     <!-- <script>
@@ -306,7 +308,8 @@
                         }
 
                         .comment__container:not(:first-child) {
-                            margin-left: 3rem;
+
+                            margin-left: -3rem;
                             margin-top: 1rem;
                         }
 
@@ -336,8 +339,14 @@
                         .show-replies {
                             outline: none;
                             padding: 8px;
-                            color: black;
+                            color: #fff;
                             cursor: pointer;
+                            /* border: 55px; */
+                            /* border-radius: 19px; */
+                            border-radius: 20px;
+                            background: #007bff;
+                            border: none;
+                            padding: 11px;
                         }
                     </style>
                 </section>

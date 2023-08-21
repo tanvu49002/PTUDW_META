@@ -17,11 +17,11 @@ class home
         if (!(isset($_SESSION['user']))) {
             header("Location:login");
         }
-        
+
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["comment-submit"])) {
             require_once "./mvc/Models/comment.php";
             $comment = new comment();
-            if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Comment-Input"])){
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Comment-Input"])) {
                 $commentdetail = $_POST["Comment-Input"];
                 $comment->insertComment($commentdetail, $_SESSION['user']['id'], $id_course);
             }
@@ -29,23 +29,26 @@ class home
         require_once "./mvc/Views/pages/detailvideo.php";
     }
 
-    public function showComment($id_user, $commentdetail){
+    public function showComment($id_user, $commentdetail)
+    {
         require_once "./mvc/Models/user.php";
         $user = new user();
         require_once "./mvc/Models/image.php";
         $image = new image();
         $displayname = $user->getUserDisplayNameById($id_user);
-        
+
         $view = '
         <div class="comment__container opened" id="first-comment">
         <div class="comment__card">
-            <h3 class="comment__title">'.$displayname.'</h3>
+            <h3 class="comment__title">' . $displayname . '</h3>
             <p>
-                '.$commentdetail.'
+                ' . $commentdetail . '
             </p>
             <div class="comment__card-footer">
-                <div>Sửa bình luận</div>
-                <div>Xóa bình luận</div>
+                <form action="">
+                    <input style="position: relative; left: -6px; padding: 8px; border-radius: 20px; background: #007bff; color: #fff; cursor: pointer; border: none;" type="submit" value="Sửa bình luận">
+                    <input style="padding: 8px; border-radius: 20px; background: red; color: #fff; cursor: pointer; border: none;" type="submit" value="Xóa bình luận">
+                </form>
             </div>
         </div>
     </div>
@@ -121,7 +124,7 @@ class home
                     <img src="' . $base_url . './public/uploads/' . $avatar_path . '" alt="avatar">
                 </div>
                 <div class="info-wrap">
-                    <h3><a href="http://localhost/PTUDW_META/teacherlist/viewprofileteacher/'.$id.'">' . $name . '</a></h3>
+                    <h3><a href="http://localhost/PTUDW_META/teacherlist/viewprofileteacher/' . $id . '">' . $name . '</a></h3>
                     <span>Giảng viên</span>
                 </div>
                 
